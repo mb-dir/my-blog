@@ -11,3 +11,37 @@ tags:
 
 <p>Programmer (how easy it is to guess) is a person who create a code. Apart for clicking on the keyboard software designer has to take care about <q>beauty</q> of his <q>work of art</q>. According to the rule <q>small is beautifull</q> it is good to use a notation which shortens the code at the same time without reducing the quality and transparency of the code(or even improving it). I have prepared some examples showing how to imporove the transparency of the code and I will show it below.</p>
 
+<h2>String concatenation</h2>
+
+<p>One of the common problems a programmer has to deal with is showing the data to the user. Frequently the data are storaged in the variable, what in case when we want to add some extra <q>comments</q>? E.g. there is the user name in the variable, and we want to show <q>Hello [user_name]!</q>. One way to solve this problem is to concatenate strings using the "+".</p>
+
+```js:title=example-1
+const user_name = "Joe";
+
+console.log("Hello " + user_name); //"Hello Joe"
+```
+<p>Ok, it doesn't look bad, but can it be simplified somehow? Of course! There come <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">backticks</a>(``) with help.</p>
+
+```js:title=example-2
+const user_name = "Joe";
+
+console.log(`Hello ${user_name}`); //"Hello Joe"
+```
+
+<p>Fact it looks simplified, and it works even better when dealing with more complicated code</p>
+
+```js:title=example-3
+const user_name = "Joe";
+const user_age = 22;
+const user_hobby = "sleeping";
+const user_current_job = "software designer";
+const user_occupation = "teacher";
+
+console.log(`It is ${user_name}, he is ${user_age} years old, his hobby is ${user_hobby}, his current job is ${user_current_job}, his occupation is ${user_occupation}`); //"It is Joe, he is 22 years old, his hobby is sleeping, his current job is software designer, his occupation is teacher"
+
+//VS
+
+console.log("It is " + user_name + ", he is " + user_age + " years old, " + "his hobby is " + user_hobby + ", his current job is " + user_current_job + ", his occupation is " + user_occupation); //"It is Joe, he is 22 years old, his hobby is sleeping, his current job is software designer, his occupation is teacher"
+```
+
+<p>Try to do something like this to see how `` are useful.</p>
