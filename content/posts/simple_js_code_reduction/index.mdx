@@ -73,7 +73,7 @@ console.log(information);//"You are not adult"
 
 <p>There is only one line instead of 4 lines, and the readability of the code doesn't change, but in case where there is more complicated notation the shorter if can decrease the code readability, look here:</p>
 
-```js:title=example-4
+```js:title=example-5
 const user_age = 55;
 
 let information = null;
@@ -100,3 +100,62 @@ if(user_age > 18){
 console.log(information);//"You are adult, but not pensioner"
 ```
 <p>There is still less code, but is it still readable for you?</p>
+
+<h2>Optional chaining</h2>
+
+<p>The objects are the data collection, they storage the data in the form of <q>key:value</q>. Reference to the object value is really easy, it is enough to refer to the key after<q>.</q></p>
+
+```js:title=example-6
+const person={
+  name: "Joe",
+}
+console.log(person.name);//Joe
+```
+
+<p>But what in case when we try to refer to the key which doesn't exist?(E.g there is some typo)</p>
+
+```js:title=example-7
+const person={
+  name: "Joe",
+}
+console.log(person.naame)//undefined
+```
+
+<p>There is an undefined value, but what in case when we try to refer the property of property which doesn't exist?</p>
+
+```js:title=example-8
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn"
+  }
+}
+console.log(person.addresss.city)//Uncaught TypeError: Cannot read properties of undefined (reading 'city')
+```
+<p>There is an error which stops the script. Of course we can use if in order to check if each property exists, but this if statement can grow rapidly. A little shorter way is to use the optional chaining, it is just a <q>?</q> before the <q>.</q></p>
+
+```js:title=example-9
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn",
+  }
+}
+if(person && person.adddress){
+  console.log(person.address.city);
+}else{
+  console.log(undefined);
+}
+
+//VS
+
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn",
+  }
+}
+console.log(person?.addresss?.city);
+```
+
+<p>Instead of an error there is an undefined value, so the script doesn't stop, and we can keep going. Of course with if statement it is also possible, but <q>?.</q> makes it easier. This is one of the way to use optional chaining, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining" target="_blank">here</a> is more information about this syntax.</p>
