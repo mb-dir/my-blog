@@ -45,3 +45,58 @@ console.log("It is " + user_name + ", he is " + user_age + " years old, " + "his
 ```
 
 <p>Try to do something like this to see how `` are useful.</p>
+
+<h2>Shorter if</h2>
+
+<p>The if statement is really important and very often used by programmer. In js there is a way to shorten the if statment. The shorter if statement is great for not very complicated examples, but in more complex cases shorter if notation can give you a little headache. Below is a comprasion of these two notation.</p>
+
+```js:title=example-4
+const user_age = 17;
+
+let information = null;
+user_age < 18 ? information = "You are not adult" : information = "You are adult";
+
+console.log(information);//"You are not adult"
+
+//VS
+
+const user_age = 17;
+
+let information = null;
+if(user_age< 18){
+  information = "You are not adult";
+}else{
+  information = "You are adult";
+}
+console.log(information);//"You are not adult"
+```
+
+<p>There is only one line instead of 4 lines, and the readability of the code doesn't change, but in case where there is more complicated notation the shorter if can decrease the code readability, look here:</p>
+
+```js:title=example-4
+const user_age = 55;
+
+let information = null;
+user_age > 18
+  ? user_age < 60 ? information = "You are adult, but not pensioner" : information = "You are adult, and pensioner"
+  : information = "You are not adult";
+
+console.log(information);//"You are adult, but not pensioner"
+
+//VS
+
+const user_age = 55;
+
+let information = null;
+if(user_age > 18){
+  if(user_age < 60){
+    information = "You are adult, but not pensioner"
+  }else{
+    information = "You are adult, and pensioner"
+  }
+}else{
+  information = "You are not adult";
+}
+console.log(information);//"You are adult, but not pensioner"
+```
+<p>There is still less code, but is it still readable for you?</p>
