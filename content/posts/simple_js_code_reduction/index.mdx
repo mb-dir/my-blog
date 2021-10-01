@@ -1,0 +1,203 @@
+---
+title: Simple JS code reduction
+date: 2021-10-01
+timeToRead: 10
+description: Post describing the possibility of a simple code reduction
+tags:
+  - Tutorial
+  - JS
+  - Beginner
+---
+<h2>Introduction</h2>
+
+<p>Programmer (how easy it is to guess) is a person who create a code. Apart for clicking on the keyboard software designer has to take care about <q>beauty</q> of his <q>work of art</q>. According to the rule <q>small is beautifull</q> it is good to use a notation which shortens the code at the same time without reducing the quality and transparency of the code(or even improving it). I have prepared some examples showing how to imporove the transparency of the code and I will show it below.</p>
+
+<h2>String concatenation</h2>
+
+<p>One of the common problems a programmer has to deal with is showing the data to the user. Frequently the data are storaged in the variable, what in case when we want to add some extra <q>comments</q>? E.g. there is the user name in the variable, and we want to show <q>Hello [user_name]!</q>. One way to solve this problem is to concatenate strings using the "+".</p>
+
+```js:title=example-1
+const user_name = "Joe";
+
+console.log("Hello " + user_name); //"Hello Joe"
+```
+<p>Ok, it doesn't look bad, but can it be simplified somehow? Of course! There come <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">backticks</a>(``) with help.</p>
+
+```js:title=example-2
+const user_name = "Joe";
+
+console.log(`Hello ${user_name}`); //"Hello Joe"
+```
+
+<p>Fact it looks simplified, and it works even better when dealing with more complicated code</p>
+
+```js:title=example-3
+const user_name = "Joe";
+const user_age = 22;
+const user_hobby = "sleeping";
+const user_current_job = "software designer";
+const user_occupation = "teacher";
+
+console.log(`It is ${user_name}, he is ${user_age} years old, his hobby is ${user_hobby}, his current job is ${user_current_job}, his occupation is ${user_occupation}`); //"It is Joe, he is 22 years old, his hobby is sleeping, his current job is software designer, his occupation is teacher"
+
+//VS
+
+console.log("It is " + user_name + ", he is " + user_age + " years old, " + "his hobby is " + user_hobby + ", his current job is " + user_current_job + ", his occupation is " + user_occupation); //"It is Joe, he is 22 years old, his hobby is sleeping, his current job is software designer, his occupation is teacher"
+```
+
+<p>Try to do something like this to see how `` are useful.</p>
+
+<h2>Shorter if</h2>
+
+<p>The if statement is really important and very often used by programmer. In js there is a way to shorten the if statment. The shorter if statement is great for not very complicated examples, but in more complex cases shorter if notation can give you a little headache. Below is a comprasion of these two notation.</p>
+
+```js:title=example-4
+const user_age = 17;
+
+let information = null;
+user_age < 18 ? information = "You are not adult" : information = "You are adult";
+
+console.log(information);//"You are not adult"
+
+//VS
+
+const user_age = 17;
+
+let information = null;
+if(user_age< 18){
+  information = "You are not adult";
+}else{
+  information = "You are adult";
+}
+console.log(information);//"You are not adult"
+```
+
+<p>There is only one line instead of 4 lines, and the readability of the code doesn't change, but in case where there is more complicated notation the shorter if can decrease the code readability, look here:</p>
+
+```js:title=example-5
+const user_age = 55;
+
+let information = null;
+user_age > 18
+  ? user_age < 60 ? information = "You are adult, but not pensioner" : information = "You are adult, and pensioner"
+  : information = "You are not adult";
+
+console.log(information);//"You are adult, but not pensioner"
+
+//VS
+
+const user_age = 55;
+
+let information = null;
+if(user_age > 18){
+  if(user_age < 60){
+    information = "You are adult, but not pensioner"
+  }else{
+    information = "You are adult, and pensioner"
+  }
+}else{
+  information = "You are not adult";
+}
+console.log(information);//"You are adult, but not pensioner"
+```
+<p>There is still less code, but is it still readable for you?</p>
+
+<h2>Optional chaining</h2>
+
+<p>The objects are the data collection, they storage the data in the form of <q>key:value</q>. Reference to the object value is really easy, it is enough to refer to the key after<q>.</q></p>
+
+```js:title=example-6
+const person={
+  name: "Joe",
+}
+console.log(person.name);//Joe
+```
+
+<p>But what in case when we try to refer to the key which doesn't exist?(E.g there is some typo)</p>
+
+```js:title=example-7
+const person={
+  name: "Joe",
+}
+console.log(person.naame)//undefined
+```
+
+<p>There is an undefined value, but what in case when we try to refer the property of property which doesn't exist?</p>
+
+```js:title=example-8
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn"
+  }
+}
+console.log(person.addresss.city)//Uncaught TypeError: Cannot read properties of undefined (reading 'city')
+```
+<p>There is an error which stops the script. Of course we can use if in order to check if each property exists, but this if statement can grow rapidly. A little shorter way is to use the optional chaining, it is just a <q>?</q> before the <q>.</q></p>
+
+```js:title=example-9
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn",
+  }
+}
+if(person && person.adddress){
+  console.log(person.address.city);
+}else{
+  console.log(undefined);
+}
+
+//VS
+
+const person={
+  name: "Joe",
+  address:{
+    city:"Londyn",
+  }
+}
+console.log(person?.addresss?.city);
+```
+
+<p>Instead of an error there is an undefined value, so the script doesn't stop, and we can keep going. Of course with if statement it is also possible, but <q>?.</q> makes it easier. This is one of the way to use optional chaining, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining" target="_blank">here</a> is more information about this syntax.</p>
+
+<h2>Destructuration</h2>
+
+<p>Let's stay on the subject of the objects. Really often there is necessity to use a lot of properties from the object, we can do it like this:</p>
+
+```js:title=example-10
+const joe = {
+  name: "Joe",
+  age: 56,
+  favoriteBand: "The Blue Stones",
+  favoriteFood: "Pizza",
+}
+
+function showInfo(person){
+  console.log(`name: ${person.name}, age: ${person.age}, favorite band: ${person.favoriteBand}, favorite food: ${person.favoriteFood}`);
+}
+
+showInfo(joe);//"name: Joe, age: 56, favorite band: The Blue Stones, favorite food: Pizza"
+```
+<p>But the constant reference to the <q>person</q> could be annoying. In js there is something like <q>destructuration</q> which allows you to <q>unpack</q> values from objects.</p>
+
+```js:title=example-11
+const joe = {
+  name: "Joe",
+  age: 56,
+  favoriteBand: "The Blue Stones",
+  favoriteFood: "Pizza",
+}
+
+function showInfo(person){
+  const {name, age, favoriteBand, favoriteFood} = person;
+  console.log(`name: ${name}, age: ${age}, favorite band: ${favoriteBand}, favorite food: ${favoriteFood}`)
+}
+
+showInfo(joe);//"name: Joe, age: 56, favorite band: The Blue Stones, favorite food: Pizza"
+```
+<p>One can say that there is one line more(and that is true), but the transparency of the code makes up for it.</p>
+
+<h2>Summary</h2>
+
+<p>I have just shown you some examples how to reduce amount of the code and increase its quality. Of course I encourage you to get to know each of the mentioned topics better, cuz it was only a <q>demo</q>.</p>
