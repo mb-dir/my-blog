@@ -1,0 +1,67 @@
+---
+title: Git best practices
+date: 2021-10-08
+timeToRead: 10
+description: Post about git best practices
+tags:
+  - Tutorial
+  - GIT
+---
+
+<h2>Introduction</h2>
+
+<p>Git is a great tool. Each programmer has to know the concept of version control system. Git (or other <abbr title="distributed version control system">DVCS</abbr>) ensure:</p>
+
+<ul>
+    <li>The place where we can keep our code</li>
+    <li>The backup copy</li>
+    <li>More efficient work in the team</li>
+    <li>Insight into the whole project history</li>
+</ul>
+
+<p>As you can see there are a lot of benefits of using git, but in order to use the potential of git you need to follow a few rules which I will describe below.</p>
+
+<h2>Take care of commit messages</h2>
+
+<p>Commit message is a summary of all your work in the context of a given task. Commit message should describe your mindset when solving a problem. For example you have just added an if which checks if some value is Null, everything works, all test pass, etc so you do the commit with commit message like this:</p>
+
+```vim:title=example-1
+Add if statement
+```
+<p>You finish your work and go home, and then other programmer starts his work and sees some changes in the code, so he views git history and sees your commit. What do you think, is he going to understand what you did? Of course not, he sees that there is a new if statment which checks Null, but he doesn't know the purpose of the change, and when he looks in commit messages he sees only <q>Add if statement</q> which also will not help him understand the cause of the change. So what good commit message should look like? - The "receipt" is simple:</p>
+
+```vim:title=example-2
+max 72 character title limit
+
+more dedailed description your way of solving the problem
+with links to documentation/StackOverflow/other helpfull materials
+```
+<p>Why 72 character title limit? Cuz some git tools are not able to display more than 72 character in one line. Also when you are not able to describe the commit in 72 character that may means you did too many changes in one commit, and the commit doesn't describe one consistant change, but several inrelated changes. So the example should look like this:</p>
+
+```vim:title=example-3
+Check the user status
+
+Due to the fact that user status maybe Null I add if statement which
+prevents displaying the wrong data about user
+```
+<p>Remember, commit message is your message for other programmer. I am quite sure that commit messages can affect on the atmosphere in the team, bad commit messages = worse atmosphere/misunderstanding/irritation, good commit messages = better atmosphere.</p>
+
+<h2>Commit complexity</h2>
+
+<p>The another important thing related with commits is that commit cannot be too complex. I mean one commit should describe one concrete change in code. For example you have added for loop which is responsible for one concrete thing, so you do the commit. Do not let to the commits were to complexity cuz the more complex commit the, less readable it is. Please answer the question - What is more readable for you, one big commit with several changes in several files, or several smaller commits, and each of them describe one consistent change?</p>
+
+<h2>Work on your own branch</h2>
+
+<p>Branches are something great in git, they allow you to work on the "copy" of the repository without affecting what is on master/main branch. So use it and work on your feature on your own branch, and remember(similar to commits) one task = one branch. For example your task is to create the new contact form, so you create the new branch and on this branch create only the contact form, do not do anything else! To do other features create the another branch!</p>
+
+<img class="fit-picture" src="./git-history-example.jpg" alt="Photo describes (almost) correct git history example"/>
+
+<p>Above is the almost correct example, each task(creating form structure and form handling) has a separate branch, the commit are consistant, and the commit messages are <q>speaking for themselves</q>, but there is a small neglect, try to expose them - I will write what is wrong at the beginning the next post.</p>
+
+<h2>Do commit review before pushing</h2>
+
+<p>When you finished some part of your work it is good to type for example <q>gitk --all</q> and do the commits review. Maybe there is some typo in commit message or there are two commit which can be <a href="https://www.git-tower.com/learn/git/faq/git-squash/" target="_blank">squashed</a>. It is worth to do such a review before pushing, sometimes by looking on your code after finished the feature you can find the bug. Commit review takes little time and can save a lot of time.</p>
+
+<h2>Summary</h2>
+
+<p>Git is a great tool, it gives huuuge opportunities, but in order to use 100% potential of git some rules must be followed.</p>
