@@ -19,7 +19,7 @@ tags:
     <li>Insight into the whole project history</li>
 </ul>
 
-<p>As you can see there are a lot of benefits of using git, but in order to use the potential of git you need to follow a few rules whcih I will describe below.</p>
+<p>As you can see there are a lot of benefits of using git, but in order to use the potential of git you need to follow a few rules which I will describe below.</p>
 
 <h2>Take care of commit messages</h2>
 
@@ -28,7 +28,7 @@ tags:
 ```vim:title=example-1
 Add if statement
 ```
-<p>You finish your work and go home, and then other programmer starts his work and sees some changes in the code, so he views git history and sees your commit. What do you think, is he going to understand what you did? Of course not, he sees that there is a new if statment which checks Null, but he doesn't know the purpose of the change, and when he looks in commit messages he sees only <q>Added if statement</q> which also will not help him understand the cause of the change. So what good commit message should look like? - The "receipt" is simple:</p>
+<p>You finish your work and go home, and then other programmer starts his work and sees some changes in the code, so he views git history and sees your commit. What do you think, is he going to understand what you did? Of course not, he sees that there is a new if statment which checks Null, but he doesn't know the purpose of the change, and when he looks in commit messages he sees only <q>Add if statement</q> which also will not help him understand the cause of the change. So what good commit message should look like? - The "receipt" is simple:</p>
 
 ```vim:title=example-2
 max 72 character title limit
@@ -48,11 +48,11 @@ prevents displaying the wrong data about user
 
 <h2>Commit complexity</h2>
 
-<p>The another important thing related with commits is that commit cannot be too complex. I mean one commit should describe one concrete change in code. For example you have added for loop which is responsible for one concrete thing, so you do the commit. Do not let to the commits were to complexity cuz the more complex commit the, less readable it is. Please answer the question - What is more readable for you, one big commit with several changes in several files, or several smaller commits, and each of them describe one consistant change?</p>
+<p>The another important thing related with commits is that commit cannot be too complex. I mean one commit should describe one concrete change in code. For example you have added for loop which is responsible for one concrete thing, so you do the commit. Do not let to the commits were to complexity cuz the more complex commit the, less readable it is. Please answer the question - What is more readable for you, one big commit with several changes in several files, or several smaller commits, and each of them describe one consistent change?</p>
 
 <h2>Work on your own branch</h2>
 
-<p>Branches are something great in git, they allow you to work on the "copy" of the repository without affecting what is on master/main branch. So use it and work on your feature on your own branch, and rembber(similar to commits) one task = one branch. For example your task is to create the new contact form, so you create the new branch and on this branch create only the contact changes, do not do anything else! To do other features create the another branch!</p>
+<p>Branches are something great in git, they allow you to work on the "copy" of the repository without affecting what is on master/main branch. So use it and work on your feature on your own branch, and remember(similar to commits) one task = one branch. For example your task is to create the new contact form, so you create the new branch and on this branch create only the contact form, do not do anything else! To do other features create the another branch!</p>
 
 <img class="fit-picture" src="./git-history-example.jpg" alt="Photo describes (almost) correct git history example"/>
 
@@ -60,8 +60,8 @@ prevents displaying the wrong data about user
 
 <h2>Do commit review before pushing</h2>
 
-<p>When you finished some part of your work it is good to type for example <q>gitk --all</q> and do the commits review. Maybe there is some typo in commit message or there are two commit which can be <a href="https://www.git-tower.com/learn/git/faq/git-squash/" target="_blank">squashed</a>. It is worth to do such a review before pushing, sometimes by looking on your code after finished the feature you can find the bug. Commit review takes litte time and can save a lot of time.</p>
+<p>When you finished some part of your work it is good to type for example <q>gitk --all</q> and do the commits review. Maybe there is some typo in commit message or there are two commit which can be <a href="https://www.git-tower.com/learn/git/faq/git-squash/" target="_blank">squashed</a>. It is worth to do such a review before pushing, sometimes by looking on your code after finished the feature you can find the bug. Commit review takes little time and can save a lot of time.</p>
 
 <h2>Summary</h2>
 
-<p>Git is a great tool, it gives huuuge oportunieties, but in order to use 100% potential of git some rules must be followed.</p>
+<p>Git is a great tool, it gives huuuge opportunities, but in order to use 100% potential of git some rules must be followed.</p>
