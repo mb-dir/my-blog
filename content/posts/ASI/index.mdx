@@ -11,3 +11,11 @@ tags:
 <h2>Introduction</h2>
 
 <p>As I promised in <a href="https://myblog96921.gatsbyjs.io/git-best-practices" target="_blank">that</a> post at the begining of this post I will explain what is wrong with one of the example(Work on your own branch), so the merge commits are not good. <q>Merge branch [branch_name]</q> is for sure not the best commit message, the merge commit message should describe let's say the main purpuse of the branch, so instead of <q>Merge branch "HTML_structure"</q> there should be something like this <q>HTML/CSS structure for user data form</q>. <q>Speaking for themselves</q> merge commits are great when it comes to realase notes, thanks to <q>git log --merges</q> we can have informations about all introduce features. Okey, it is hight time to go to the main topic of the post.</p>
+
+<p>Dear semicolons... I can bet all my savings that 9/10 progremmers at least one in their live has seen such a comunicat <q>error: expected ; before token</q>. The semicolins are required(in most programing languages) - thanks to them the complier can separate the instructions, e.g:</p>
+
+```c:title=example-1(in-c)
+int a = 1;//Thanks to the ";" the compiler knows that is a separate instruction
+printf("%d", a);//And this is another separate instruction
+```
+<p>In most programing languages the compiler will not compile the code without the <q>;</q>, but JS(of course) must be different...</p>
