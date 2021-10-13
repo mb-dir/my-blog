@@ -19,3 +19,50 @@ int a = 1;//Thanks to the ";" the compiler knows that is a separate instruction
 printf("%d", a);//And this is another separate instruction
 ```
 <p>In most programing languages the compiler will not compile the code without the <q>;</q>, but JS(of course) must be different...</p>
+
+<h2>Automatin Semicolon Insertion</h2>
+
+<p>Our dear JS doesn't require you to use the semicolon, the <abbr title="Automatin Semicolon Insertion">ASI</abbr> mechanic automatically recognizes where the semicolon should be and insert it there.</p>
+
+```js:title=example-2
+//JS sees this
+const a = 1
+
+//Like this
+const a = 1;
+```
+<p>But there are some cases when the ASI behaves diffrently than we expect, for instance some programmers write the brace in the new line - I mean they do something like that</p>
+
+```js:title=example-3
+function objReturn()
+{
+  //Function code
+}
+```
+
+<p>In case of some JS key words this way of writing may have undesirable results, for example</p>
+
+```js:title=example-4
+function objReturn() {
+  return 
+  {
+    name: "Joe",
+  }
+}
+
+console.log(objReturn());
+```
+<p>Will show undefined insted of object, why? Because of ASI, this mechanic inserts the semicolon after the return key word(in this case return), so JS sees it like that:</p>
+
+```js:title=example-5
+function objReturn() {
+  return;
+  {
+    name: "Joe",
+  }
+}
+
+console.log(objReturn());
+```
+
+<p>In this case this function returns nothing(undefianed), cuz the <q>;</q> means end of the expression. Just note that try to avoid using the ASI, in theory it is useful, but in some cases it may be so problematic. Also(in my opinion) the code with semicolins is pretier.</p>
