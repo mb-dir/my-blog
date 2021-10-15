@@ -10,9 +10,9 @@ tags:
 ---
 <h2>Introduction</h2>
 
-<p>As I promised in <a href="https://myblog96921.gatsbyjs.io/git-best-practices" target="_blank">that</a> post at the begining of this post I will explain what is wrong with one of the example(Work on your own branch), so the merge commits are not good. <q>Merge branch [branch_name]</q> is for sure not the best commit message, the merge commit message should describe let's say the main purpuse of the branch, so instead of <q>Merge branch "HTML_structure"</q> there should be something like this <q>HTML/CSS structure for user data form</q>. <q>Speaking for themselves</q> merge commits are great when it comes to realase notes, thanks to <q>git log --merges</q> we can have informations about all introduce features. Okey, it is hight time to go to the main topic of the post.</p>
+<p>As I promised in <a href="https://myblog96921.gatsbyjs.io/git-best-practices" target="_blank">that</a> post at the beginning of this post I will explain what is wrong with one of the example(Work on your own branch), so the merge commits are not good. <q>Merge branch [branch_name]</q> is for sure not the best commit message, the merge commit message should describe let's say the main purpose of the branch, so instead of <q>Merge branch "HTML_structure"</q> there should be something like this <q>HTML/CSS structure for user data form</q>. <q>Speaking for themselves</q> merge commits are great when it comes to realese notes, thanks to <q>git log --merges</q> we can have informations about all introduce features. Okay, it is high time to go to the main topic of the post.</p>
 
-<p>Dear semicolons... I can bet all my savings that 9/10 progremmers at least one in their live has seen such a comunicat <q>error: expected ; before token</q>. The semicolins are required(in most programing languages) - thanks to them the complier can separate the instructions, e.g:</p>
+<p>Dear semicolons... I can bet all my savings that 9/10 programmers at least one in their live has seen such a comunicat <q>error: expected ; before token</q>. The semicolons are required(in most programing languages) - thanks to them the compiler can separate the instructions, e.g:</p>
 
 ```c:title=example-1(in-c)
 int a = 1;//Thanks to the ";" the compiler knows that is a separate instruction
@@ -31,7 +31,7 @@ const a = 1
 //Like this
 const a = 1;
 ```
-<p>But there are some cases when the ASI behaves diffrently than we expect, for instance some programmers write the brace in the new line - I mean they do something like that</p>
+<p>But there are some cases when the ASI behaves differently than we expect, for instance some programmers write the brace in the new line - I mean they do something like that</p>
 
 ```js:title=example-3
 function objReturn()
@@ -52,7 +52,7 @@ function objReturn() {
 
 console.log(objReturn());
 ```
-<p>Will show undefined insted of object, why? Because of ASI, this mechanic inserts the semicolon after the return key word(in this case return), so JS sees it like that:</p>
+<p>Will show undefined instead of object, why? Because of ASI, this mechanic inserts the semicolon after the return key word(in this case return), so JS sees it like that:</p>
 
 ```js:title=example-5
 function objReturn() {
@@ -65,7 +65,7 @@ function objReturn() {
 console.log(objReturn());
 ```
 
-<p>In this case this function returns nothing(undefianed), cuz the <q>;</q> means end of the expression. Just note that try to avoid using the ASI, in theory it is useful, but in some cases it may be so problematic. Also(in my opinion) the code with semicolins is pretier.</p>
+<p>In this case this function returns nothing(undefined), cuz the <q>;</q> means end of the expression. Just note that try to avoid using the ASI, in theory it is useful, but in some cases it may be so problematic. Also(in my opinion) the code with semicolons is prettier.</p>
 
 <h2>Summary</h2>
 <p>As you can see, the ASI may cause the problems, of course in most cases ASI works well, but the error that results from the wrong ASI working can be difficult to find. There is no great philosophy, just use <q>;</q> to avoid problems, but if you want to read more detailed description click <a href="http://www.bradoncode.com/blog/2015/08/26/javascript-semi-colon-insertion/" target="_blank">here</a>.</p>
