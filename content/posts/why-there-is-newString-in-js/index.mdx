@@ -54,3 +54,18 @@ console.log(quote2nd);
   <img class="fit-picture" src="./example2.jpg" alt="Photo showing the prototype of object quite2nd"/>
   Ha! Wee got you! Our <q>toUpperCase()</q> method is here and that means we can use <q>toUpperCase()</q> when it comes to <q>quote2nd</q>, but why when we declarate string like in 1st example we still can use this method since it is not an object(and in theory doesn't have the prototype with <q>toUpperCase()</q>)?
 </p>
+
+<h2>Behind the scenes</h2>
+<p>The answer is easy, JS <q>behind the scenes</q> changes the string primitive into string object, on the string object calls the method and returns to its orginal form. Let's unmask the JS!</p>
+
+```js:title=example-4
+//It is of course some kind of simplification
+let language = 'JavaScript';
+// behind the scenes JS changes it into object, call the appropriate method and then delete unnecessary instance
+let temp = new String(language);
+str = temp.toUpperCase();
+temp = null;
+
+console.log(str);//JAVASCRIPT
+```
+<p>There are also two such a primitive object wrappers, one for Number and one for Boolien, the principle of how they work is the same as a string wrapper.</p>
