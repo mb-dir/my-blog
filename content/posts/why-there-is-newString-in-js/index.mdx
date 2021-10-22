@@ -12,8 +12,8 @@ tags:
 <h2>Introduction</h2>
 <p>Have you ever wondered why in JS we can work with primitive type like with reference type? I mean why when we want to upper the string we use <q>toUpperCase()</q> as if it was the method of the object when the string is a primitive type - but why? I will try to explain it to you below.</p>
 
-<h2>The diffrence between string and new String</h2>
-<p>In JS we can declarate the string type in two ways:</p>
+<h2>The difference between string and new String</h2>
+<p>In JS we can declare the string type in two ways:</p>
 
 ```js:title=example-1
 //1st
@@ -35,7 +35,7 @@ const quote2nd = new String("Last Christmas, I gave you my heart");
 console.log(typeof(quote1st), typeof(quote2nd)); //string object
 ```
 
-<p>As expected <q>quite2nd</q> is an object, so the object has method so we find the first clue to answer the question, let's go a step further and see what exactly is <q>quote2nd</q></p>
+<p>As expected <q>quote2nd</q> is an object, so the object has methods so we find the first clue to answer the question, let's go a step further and see what exactly is <q>quote2nd</q></p>
 
 ```js:title=example-3
 //1st
@@ -52,11 +52,11 @@ console.log(quote2nd);
   <img class="fit-picture" src="./example1.jpg" alt="Photo showing the console content after console.log(quote2nd)"/>
   Let's see the prototype of this object:
   <img class="fit-picture" src="./example2.jpg" alt="Photo showing the prototype of object quite2nd"/>
-  Ha! Wee got you! Our <q>toUpperCase()</q> method is here and that means we can use <q>toUpperCase()</q> when it comes to <q>quote2nd</q>, but why when we declarate string like in 1st example we still can use this method since it is not an object(and in theory doesn't have the prototype with <q>toUpperCase()</q>)?
+  Ha! Wee got you! Our <q>toUpperCase()</q> method is here and that means we can use <q>toUpperCase()</q> when it comes to <q>quote2nd</q>, but why when we declare string like in 1st example we still can use this method since it is not an object(and in theory doesn't have the prototype with <q>toUpperCase()</q>)?
 </p>
 
 <h2>Behind the scenes</h2>
-<p>The answer is easy, JS <q>behind the scenes</q> changes the string primitive into string object, on the string object calls the method and returns to its orginal form. Let's unmask the JS!</p>
+<p>The answer is easy, JS <q>behind the scenes</q> changes the string primitive into string object, on the string object calls the method and returns to its original form. Let's unmask the JS!</p>
 
 ```js:title=example-4
 //It is of course some kind of simplification
@@ -68,7 +68,7 @@ temp = null;
 
 console.log(str);//JAVASCRIPT
 ```
-<p>There are also two such a primitive object wrappers, one for Number and one for Boolien, the principle of how they work is the same as a string wrapper.</p>
+<p>There are also two such a primitive object wrappers, one for Number and one for Boolean, the principle of how they work is the same as a string wrapper.</p>
 
 <h2>Summary</h2>
 <p>JS thanks to his working behind the scenes helps us(does things for us) in our programmer live, and the conception of primitive object wrappers is for sure a great example of such help.</p>
