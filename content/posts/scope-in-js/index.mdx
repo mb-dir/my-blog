@@ -13,3 +13,14 @@ tags:
 
 <h2>The definition</h2>
 <p>Scope is just a set of rules according to which JavaScript search the informations included in variable, but what does it mean? That means we are not always to refer to a concrete variable, if JS <q>doesn't see</q> the variable in the concrete scope this information will not be able for us.</p>
+
+<h2>What determines the scope?</h2>
+<p>
+  When it comes to <q>seeing</q> the variables there are there types of scope(there are also lexical and dynamic scope, but it's a separate topic)
+  <ul>
+    <li>Global scope</li>
+    <li>Block scope</li>
+    <li>Function scope</li>
+  </ul>
+  <strong>Global scope</strong> as the name suggests is global, so the variables daclare in this scope are visible anywhare in the code. We daclare global scope variable and we can use it wherever we want. <strong>Block scope</strong> is limited by &#123; &#125;, so if we daclare the variable in &#123; &#125; we can refer to this variable in this &#123; &#125; and in each <q>child</q> scope(I will show it with examples). <strong>Function scope</strong> is limited by function statement so if we daclare the variable in function we can refer to this variable in this function and in each <q>child</q> scope(the function parameters also belong to function scope). Definitions, definitions... Let's see the examples!
+</p>
