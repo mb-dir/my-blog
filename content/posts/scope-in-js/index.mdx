@@ -23,4 +23,108 @@ tags:
     <li>Function scope</li>
   </ul>
   <strong>Global scope</strong> as the name suggests is global, so the variables daclare in this scope are visible anywhare in the code. We daclare global scope variable and we can use it wherever we want. <strong>Block scope</strong> is limited by &#123; &#125;, so if we daclare the variable in &#123; &#125; we can refer to this variable in this &#123; &#125; and in each <q>child</q> scope(I will show it with examples). <strong>Function scope</strong> is limited by function statement so if we daclare the variable in function we can refer to this variable in this function and in each <q>child</q> scope(the function parameters also belong to function scope). Definitions, definitions... Let's see the examples!
+
+```js:title=global-scope-example
+const globalScope = "Hi";
+
+console.log(globalScope);
+
+{
+  console.log(globalScope);
+}
+
+function test(){
+  console.log(globalScope);
+  if(true){
+    console.log(globalScope);
+  }
+}
+
+test();
+
+for(let i = 0; i < 7; i++){
+  if(i > 3 && i % 2 === 0){
+    console.log(globalScope);
+  }
+}
+
+```
+
+And the result in console:
+</p>
+
+<img class="fit-picture" src="./global-scope-example.jpg" alt="Photo showing the concept of global scope"/>
+
+<p>
+  As you can see we can refer to the <q>globalScope</q> from anywhere, let's see what happen when we come to block scope
+
+```js:title=block-scope-example
+{
+  const blockScope = "Hi";
+  
+  console.log(blockScope);
+  
+  if(true){
+    console.log(blockScope);
+  }
+  
+  for(let i = 0; i < 7; i++){
+    if(i > 3 && i % 2 === 0){
+      console.log(blockScope);
+    }
+  }
+  
+  {
+    console.log(blockScope);
+  }
+  
+}
+console.log(blockScope);
+
+```
+Result:
+</p>
+
+<img class="fit-picture" src="./block-scope-example.jpg" alt="Photo showing the concept of block scope"/>
+
+<p>
+  There is an error when it comes to the last console.log(), JavaScript doesn't see the blockScope variable outside the &#123; &#125; cuz the block scope limits it. Of course when it comes to previous refers everything works well, cuz they are <q>child</q> scope. The situatuon is identical when it comes to function scope:
+
+```js:title=function-scope-example
+{
+function functionScope(a,b){
+  const hi = "hi";
+  console.log(a, b, hi);
+  
+  if(true){
+    console.log(a, b, hi);
+  }
+}
+functionScope(1, 2);
+
+console.log(a, b, hi);
+
+```
+</p>
+
+<img class="fit-picture" src="./function-scope-example.jpg" alt="Photo showing the concept of block scope"/>
+
+<p>
+  Attempt to refer the variables outside the function scope(or child scope) finishes with the error. Now small task for you, try to predict how this code works:
+
+```js:title=task
+{
+
+  {
+    const a = 1;
+  }
+  {
+    console.log(a);
+  }
+
+}
+
+```
+
+I will answer on this question at the end of the post.
 </p>
