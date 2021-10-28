@@ -128,3 +128,43 @@ console.log(a, b, hi);
 
 I will answer on this question at the end of the post.
 </p>
+
+<h2>The scope advantages</h2>
+
+<p>
+Ok, so we know what the scope is, but why is it so useful? First of all thanks to scope there is less chance of naming conflicts.
+
+```js:title=example
+function test(){
+  const a = 2;
+}
+
+function anotherTest(){
+  const a = 1;
+}
+
+```
+VS
+
+```js:title=example
+const a = 2;
+const a = 1;
+```
+
+The another nice thing about the scope is that there is less chance to re-write the variable value, if all variables are declared in global scope chance of accidental variable value overwrittng is getting higher and higher with each new variable.
+
+```js:title=example
+function test(){
+  let a = 2;
+  console.log(a);
+}
+
+let a = 1;
+console.log(a);//1
+test();//2
+```
+Thanks to the scope, the variables were not overwritten
+
+Also the code readability increses, try to write something easy in JS, but delcare all variables in global scope - 
+the bigger the project is, the more unreadable it will be because of global variables.
+</p>
