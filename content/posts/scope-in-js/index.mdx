@@ -171,3 +171,6 @@ the bigger the project is, the more unreadable it will be because of global vari
 
 <h2>Summary</h2>
 <p>The scope is so useful and important JS concept, the scope definition could be incomprehensible, but seeing some practical examples can help to understand this concept. I encourage you to <q>play</q> with scope - for sure that will help you to understand scope.</p>
+
+<h2>PS</h2>
+<p>No, I haven't forgotten about the task, so of course there is an error <q>Uncaught ReferenceError: a is not defined </q> cuz in line 7 we try to refer the <q>a</q> value, JS doesn't find it in its scope, so he goes up to the parent block scope, and also doesn't find the <q>a</q>, and JS goes up again(to global scope) and doesn't find the variable again. The <q>a</q> is declared in let's say <q>sibling</q> block scope(looking from the console.log() perspective), and the <q>siblings</q> scopes have no access to each other.</p>
