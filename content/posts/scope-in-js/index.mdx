@@ -9,7 +9,7 @@ tags:
 ---
 
 <h2>Introduction</h2>
-<p>Today we will speak about really important concept of JavaScript namely about <strong>scope</strong>. We do not use the scope directly, I mean we do not daclare scope like variables or we are not able to read the property of the scope, etc, but we have to know how the scope works. Let's break down the scope!</p>
+<p>Today we will speak about really important concept of JavaScript namely about <strong>scope</strong>. We do not use the scope directly, I mean we do not declare scope like variables or we are not able to read the property of the scope, etc, but we have to know how the scope works. Let's break down the scope!</p>
 
 <h2>The definition</h2>
 <p>Scope is just a set of rules according to which JavaScript search the informations included in variable, but what does it mean? That means we are not always to refer to a concrete variable, if JS <q>doesn't see</q> the variable in the concrete scope this information will not be able for us.</p>
@@ -22,7 +22,7 @@ tags:
     <li>Block scope</li>
     <li>Function scope</li>
   </ul>
-  <strong>Global scope</strong> as the name suggests is global, so the variables daclare in this scope are visible anywhare in the code. We daclare global scope variable and we can use it wherever we want. <strong>Block scope</strong> is limited by &#123; &#125;, so if we daclare the variable in &#123; &#125; we can refer to this variable in this &#123; &#125; and in each <q>child</q> scope(I will show it with examples). <strong>Function scope</strong> is limited by function statement so if we daclare the variable in function we can refer to this variable in this function and in each <q>child</q> scope(the function parameters also belong to function scope). Definitions, definitions... Let's see the examples!
+  <strong>Global scope</strong> as the name suggests is global, so the variables declared in this scope are visible anywhere in the code. We declare global scope variable and we can use it wherever we want. <strong>Block scope</strong> is limited by &#123; &#125;, so if we daclare the variable in &#123; &#125; we can refer to this variable in this &#123; &#125; and in each <q>child</q> scope(I will show it with examples). <strong>Function scope</strong> is limited by function statement so if we daclare the variable in function we can refer to this variable in this function and in each <q>child</q> scope(the function parameters also belong to function scope). Definitions, definitions... Let's see the examples!
 
 ```js:title=global-scope-example
 const globalScope = "Hi";
@@ -88,7 +88,7 @@ Result:
 <img class="fit-picture" src="./block-scope-example.jpg" alt="Photo showing the concept of block scope"/>
 
 <p>
-  There is an error when it comes to the last console.log(), JavaScript doesn't see the blockScope variable outside the &#123; &#125; cuz the block scope limits it. Of course when it comes to previous refers everything works well, cuz they are <q>child</q> scope. The situatuon is identical when it comes to function scope:
+  There is an error when it comes to the last console.log(), JavaScript doesn't see the blockScope variable outside the &#123; &#125; cuz the block scope limits it. Of course when it comes to previous refers everything works well, cuz they are <q>child</q> scope. The situation is identical when it comes to function scope:
 
 ```js:title=function-scope-example
 {
