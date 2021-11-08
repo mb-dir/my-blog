@@ -12,3 +12,24 @@ tags:
 
 <h2>The animations are not the most important thing</h2>
 <p>Really often we forget about the point of website. The main purpose of website is to present the informations - the content is the most important. The animations have to be only ornaments, but on some websites we can notice an excess of form over content. Such a page has a lot of animations, and those animations interfere with finding the content that interests the user. It is also worth to check how the animations perform on mobile.</p>
+
+<h2>How to create optimized animation</h2>
+<p>
+  First of all we have to know how the browser rendering works. After parsing(going throught HTML and CSS and creating DOM and CSSOM) browser has to do another three things: 
+</p>
+  <ul>
+    <li>Layout</li>
+    <li>Paint</li>
+    <li>Composite</li>
+  </ul>
+  
+  <h2>Layout</h2>
+  <p>In this step, width and height are determined. This step also determine the element's position on the pages.</p>
+
+  <h2>Paint</h2>
+  <p>In this step each pixel is filled with the suitable color.</p>
+  
+  <h2>Composite</h2>
+  <p>In this step browser <q>puts</q> the layers together.</p>
+
+  <p>The change of some css property durning the animations calles those steps, but some properties do not call all three steps, and the optimized animation is when it only call the composite step. <a href="https://csstriggers.com/" target="_blank">Here</a> is the list which shows which properties call whoch steps(we pay attention to <q>Subsequent updates</q> and to Blink and Gecko(the most popular browser engines)). As we can see the most <q>optimized</q> properties are <b>opacity</b> and <b>transform</b>. So the conclusion is that we have to animate using <b>opacity</b> and <b>transform</b> instead of width, height, margin, color, etc.</p>
