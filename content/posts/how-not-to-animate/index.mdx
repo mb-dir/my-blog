@@ -33,3 +33,6 @@ tags:
   <p>In this step browser <q>puts</q> the layers together.</p>
 
   <p>The change of some css property durning the animations calles those steps, but some properties do not call all three steps, and the optimized animation is when it only call the composite step. <a href="https://csstriggers.com/" target="_blank">Here</a> is the list which shows which properties call whoch steps(we pay attention to <q>Subsequent updates</q> and to Blink and Gecko(the most popular browser engines)). As we can see the most <q>optimized</q> properties are <b>opacity</b> and <b>transform</b>. So the conclusion is that we have to animate using <b>opacity</b> and <b>transform</b> instead of width, height, margin, color, etc.</p>
+
+  <h2>Summary</h2>
+  <p>Remember, always think twice when it comes to animations, first - is this animation really necessary? And second - is my animation well performed/optimized? <a href="https://www.youtube.com/watch?v=N5EW4HnF6FU&t" target="_blank">Here</a> is a short video on this issue with a lot of examples - I encourage you to watch it.</p>
