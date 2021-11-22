@@ -1,0 +1,70 @@
+---
+title: Semantic meaning of non-semantic tags
+date: 2021-11-22
+timeToRead: 10
+description: Post describes how to use properly div and span
+tags:
+  - HTML
+  - Intermediate
+---
+
+<h2>Introduction</h2>
+<p>The correct use of HTML tags is really important, especially when it comes to screen readers. Thanks to <a href="https://developer.mozilla.org/en-US/" target="_blank">MDN</a> we know the meaning of each tag - for instance we know that we should use &#60;h1&#62; as a main header on the page, but what about &#60;div&#62; and &#60;span&#62;? What does that phrase: <q>the &#60;div&#62; element does not inherently represent anything</q> mean? Let's break it down!</p>
+
+<h2>Knowing the definition helps in the correct use of tag</h2>
+<p>As the title suggests if we know the definition(semantic meaning) of tag we know when to use it(there is nothing revealing about it), but what in case when the definition says that the tag has no semantic meaning? What I will write at first glance may seem contradictory, namly: the lack of semantic meaning of the tag determines its semantic meaning. &#60;div&#62; and &#60;span&#62; are used where nothing else fits. When our page fragment cannot be considered as header, section, footer, main, sidebar, etc then &#60;div&#62; and &#60;span&#62;(which do not define any meaning for page fragment) enter the game. Basically &#60;div&#62; and &#60;span&#62; are used when we need to create some container(for instace for css needs(grid or something)) and nothing else fits. This characteristic &#60;div&#62; and &#60;span&#62; allows us to create container which doesn't have any meaning.
+</p>
+
+<h2>The difference between div and span</h2>
+<p>Ok, we know what's going on div and span, but what is the difference between them? First of all, &#60;div&#62; has display: block, when &#60;span&#62; is <q>inline</q> - that means divs stacked one above the other when spans are stacked side by side. Based on this information we can draw conclusion that &#60;div&#62; is used instead of other block elements like &#60;main&#62; or &#60;section&#62; and &#60;span&#62; is used instead of some elements like paragraphs or &#60;h1&#62; (text content).</p>
+
+<h2>Some examples</h2>
+<p>Let's assume that we want to create a simple page template with header, main(with two sections) and footer, there is one of an example of solution:</p>
+
+```html:title=example-1
+<header class="mainHeader">
+  <h1 class="mainHeader__pageTitle">Hello</h1>
+  <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris</p>
+</header>
+<main class="mainContent">
+  <section class="mainContent__section">
+    <h2 class="mainContent__header">Hello</h2>
+    <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris, Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris.</p>
+  </section>
+
+  <section class="mainContent__section">
+    <h2 class="mainContent__header">Hello</h2>
+    <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris, Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris.</p>
+  </section>
+</main>
+<footer class="footer">
+  <p class="footer__info">copyright © 2021 . All rights reserved.</p>
+</footer>
+```
+
+<p>And let's assume that we want to highlight(change the color) the date in footer - how to do it? Changing the color for the <q>footer__info</q> class is not the best idea(then the whole phrase will have other color) - we have to <q>wrap</q> only our date in some extra tag and then style this tag appropriate, but which tag we can use? Of course &#60;span&#62;</p>
+
+```html:title=example-2
+<header class="mainHeader">
+  <h1 class="mainHeader__pageTitle">Hello</h1>
+  <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris</p>
+</header>
+<main class="mainContent">
+  <section class="mainContent__section">
+    <h2 class="mainContent__header">Hello</h2>
+    <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris, Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris.</p>
+  </section>
+
+  <section class="mainContent__section">
+    <h2 class="mainContent__header">Hello</h2>
+    <p class="mainHeader__pageInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris. Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris, Phasellus eu lacinia enim. Sed imperdiet malesuada finibus. Pellentesque justo lectus, mollis nec mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu mattis mauris.</p>
+  </section>
+</main>
+<footer class="footer">
+  <p class="footer__info">copyright © <span class="footer__infoDate">2021</span> . All rights reserved.</p>
+</footer>
+```
+<p>And then we can style <q>footer__infoDate</q> in css and what is more this &#60;span&#62; will not change the semantic meaning of this page fragment.</p>
+
+<h2>Summary</h2>
+<p>As you can see &#60;div&#62; and &#60;span&#62; despite of their apparent unsuitability are useful - but we have to remember that &#60;div&#62; and &#60;span&#62; are only some kind of <q>supplement</q> and they are used when nothing else fits.</p>
