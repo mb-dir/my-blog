@@ -8,3 +8,31 @@ tags:
   - HTML
   - Beginner
 ---
+<article>
+    <h2>Introduction</h2>
+    <p>The bigger project the more complex everything becomes, this idea also applies to something as(theoretically) simple as the class naming. It doesn't take long look for examples e.g. it can be so hard to come up with six diffrent class names for six level of header(h1 to h6). One can say that there is no big necessary to attach a great importance to class names or even there is no necessary to use class, since we can style this code:</p>
+
+```html:title=example-1
+<main>
+  <section>
+    <div>
+      <ul>
+        <li><a href="">Click!</a></li>
+      </ul>
+    </div>
+  </section>
+  <a href="">Click2</a>
+</main>
+```
+
+<p>Like this:</p>
+
+```css:title=example-2
+main > section > div > ul > li > a{
+  color: red;
+}
+```
+
+<p>And okey it works, but such approach is fatal in the long run. The longer you develop such a project, the less time you spend on the implementation of new ideas, insted of you will <q>fight</q> with attempt to understand what is responsible for what in css. One of the way to fight with such a <q>mess</q> are naming methodologies, one of the most popular is BEM about which this post will be.</p>
+
+</article>
