@@ -1,0 +1,183 @@
+---
+title: BEM basics
+date: 2021-12-04
+timeToRead: 10
+description: In this post I explain what is BEM.
+tags:
+  - Tutorial
+  - HTML
+  - Beginner
+---
+<article>
+    <h2>Introduction</h2>
+    <p>The bigger project the more complex everything becomes, this idea also applies to something as(theoretically) simple as the class naming. It doesn't take long look for examples e.g. it can be so hard to come up with six different class names for six level of header(h1 to h6). One can say that there is no big necessary to attach a great importance to class names or even there is no necessary to use class, since we can style this code:</p>
+
+```html:title=example-1
+<main>
+  <section>
+    <div>
+      <ul>
+        <li><a href="">Click!</a></li>
+      </ul>
+    </div>
+  </section>
+  <a href="">Click2</a>
+</main>
+```
+
+<p>Like this:</p>
+
+```css:title=example-2
+main > section > div > ul > li > a{
+  color: red;
+}
+```
+
+<p>And okey it works, but such approach is fatal in the long run. The longer you develop such a project, the less time you spend on the implementation of new ideas, insted of you will <q>fight</q> with attempt to understand what is responsible for what in css. One of the way to fight with such a <q>mess</q> are naming methodologies, one of the most popular is BEM about which this post will be.</p>
+
+</article>
+
+<article>
+  <h2>BEM</h2>
+  <p>BEM is a set of rules according to which we create the class names. In BEM we recognize three types of class names:</p>
+  <ul>
+    <li>Block</li>
+    <li>Element</li>
+    <li>Modifier</li>
+  </ul>
+
+  <p>As you can see the first letters of class names types make up the methodology name. In order to understand BEM we have to start think little different about each tag - is this fragment indivisible and independent? Or is it treat like a part of the whole? Or maybe it is only modifier.</p>
+</article>
+
+<article>
+  <h2>Block, element and modifier</h2>
+  <p><strong>Block</strong> is something like component - it is a coherent, separate and reusable part of something bigger - really often component includes some smaller parts which are dependent on him(they cannot stand alone/they cannot be outside the component) and those smaller parts are <strong>element</strong>. The last term is <strong>modifier</strong> and it is used when block or element have to be modified(e.g in hover effect).</p>
+</article>
+
+<article>
+  <h2>How to create names for block, element and modifier?</h2>
+  <p>There are a lot of ways to create class name according with BEM, but they differ in small details(anyway the most important thing is to understand which part of page we have to treat as a block, which as an element and which as a modifier). Generally there is no rule how to create block class, but when it comes to element you have to attach the element part to block part with <q>_</q> or <q>__</q> and when you want to create modifier you have to reapet the class name add attach the modifier part with <q>--</q>. I know it may look complicated, but it is just so hard to explain. I hope you will understand this when you see some examples.</p>
+
+</article>
+
+<article>
+  <h2>Examples</h2>
+  <p>Let's see BEM methodologies in practice, the first example will be really basic</p>
+
+```html:title=example-3
+<header class="mainHeader">
+  <h1 class="mainHeader__pageTitle">Helllo!</h1>
+  <p class="mainHeader__pageDescribtion">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit earum, quas porro nemo tempora sint suscipit!</p>
+  <p class="mainHeader__pageDescribtion">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit earum, quas porro nemo tempora sint suscipit!</p>
+  <p class="mainHeader__pageDescribtion mainHeader__pageDescribtion--lighter">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit earum, quas porro nemo tempora sint suscipit!</p>
+</header>
+```
+
+<p>As you can see &#60;header&#62; tag is treated as a <strong>block</strong> - it is a coherent, separate and reusable part of something bigger(the whole page), and now we want to have &#60;h1&#62; inside this &#60;header&#62;, this &#60;h1&#62; is a dependent element, directly related to &#60;header&#62; so in BEM nomenclature it is an <strong>element</strong> and we create class name for &#60;h1&#62; by adding <q>__pageTitle</q> to class name of <strong>block</strong>(header). The same scheme applies for &#60;p&#62; elements. And now we come to <strong>modifier</strong>. Let's assume that we want to the third &#60;p&#62; was a little bit lighter(we want to highlight it) - it is a job for <strong>modifier</strong>. The <strong>modifier</strong> is a separate class resulting from combining the main class name with the suffix(in this case <q>--lighter</q>) - why is it a separate class? The <strong>modifier</strong> doesn't not describe the whole elelemt, he only modifies the element - we want to <strong>modifier</strong> overwrite something for us. Now we can make style for this example using only one class name for each element - everything is simple and readable</p>
+
+
+```css:title=example-4
+.mainHeader{
+  text-align: center;
+  font-family: sans-serif;
+  border: 3px solid;
+  border-radius: 5px;
+}
+.mainHeader__pageTitle{
+  font-size: 42px;
+  text-shadow: 2px 2px 2px #343434;
+}
+.mainHeader__pageDescribtion{
+  font-style: oblique;
+  color: #206ce6;
+}
+.mainHeader__pageDescribtion--lighter{
+  color: #4d91ff;
+/*  as you can see in modifier we modify the color property */
+}
+
+```
+
+<p>Now have a look for more complicated example</p>
+
+```html:title=example-5
+<footer class="footer">
+  <address class="footer__addressPart">
+    <p class="paragraph">You can contact author at <a class="link" href="http://www.somedomain.com/contact">
+    www.somedomain.com</a></p>
+    <p class="paragraph">If you see any bugs, please <a class="link" href="mailto:webmaster@somedomain.com">
+    contact webmaster</a></p>
+    <p class="paragraph">You may also want to visit us: Mozilla Foundation 331 E Evelyn Ave Mountain View, CA 94041 USA</p>
+  </address>
+  <form action="" class="contactForm footer__contactPart">
+    <label class="contactForm__label" for="name">Your name</label>
+    <input type="text" class="contactForm__input" id="name">
+    
+    <label class="contactForm__label" for="email">Your email</label>
+    <input type="text" class="contactForm__input" id="email">
+    
+    <label class="contactForm__label" for="question">Your question</label>
+    <textarea type="text" class="contactForm__textarea" id="question"></textarea>
+    
+    <button class="btn contactForm__send contactForm__send--lighter">Send!</button>
+  </form>
+  <p class="paragraph footer__rightsReserved">copyright © 2011 . All rights reserved.</p>
+</footer>
+}
+
+```
+
+<p>Ok, so I hope first two classes(for footer and address) are understandable, but why &#60;p&#62; doesn't have class like <q>footer__paragraph</q>? Because in my opinion &#60;p&#62; elelemt is a coherent, separate and reusable part of something bigger so I treat it as a block(not directly related to footer element). The same about links - I treat them <q>globally</q> - they are not related with one concrete element(same as &#60;p&#62;). The next element is &#60;form&#62; and it has two classes - <q>contactForm></q>(points to block) and <q>footer__contactPart</q>(points to element) - WTF what is this? The single part of the page can be both block and element - <q>contactForm></q> is a coherent, separate and reusable part of something bigger and can be used wherever on the page(as a single component) when <q>footer__contactPart</q> says that it is an element of &#60;footer&#62;(related with this footer) - something like that names <q>mixes</q>(more about mixes <a target="_blank" href="https://en.bem.info/forum/4/">here</a>) - we can noticed mixes also in the last &#60;p&#62; element. The last intresting thing is about &#60;button&#62; - there is block, element and modifier(and it's just a nice mix). Why a block(<q>btn</q> class)? Cuz it is a coherent, separate and reusable part of something bigger and can be used wherever on the page. Why en element(<q>contactForm__send</q>)? Cuz it is related with &#60;form&#62;. Why a modifier(<q>contactForm__send--lighter</q>)? Cuz on the hover I change something - notice the fact this modifier concerns only an element(modifies only an element) - there is no relation between modifier and block class(<q>btn</q>).
+
+And the styles for it:
+</p>
+
+```css:title=example-6
+body{
+  text-align: center;
+}
+.footer{
+  border: 3px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer__addressPart{
+  width: 45%;
+}
+.footer__contactPart{
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contactForm__label{
+  display: block;
+  width: 100%;
+}
+.contactForm__textarea{
+  width: 90%;
+  height: 100px;
+  margin: 0 4%;
+}
+.contactForm__textarea{
+  resize: none;
+}
+.btn{
+  display: block;
+}
+.contactForm__send--lighter:hover{
+  color: yellow;
+}
+
+```
+
+</article>
+
+<article>
+<h2>Summary</h2>
+
+<p>On first sight BEM could be a little bit strange, but in long-term it is really useful. One of the best thing which you can do if you want to understand BEM is just analize the BEM examples - I recommend you to analyze <a target="_blank" href="https://getbootstrap.com/docs/5.0/components/accordion/">bootstrap components</a> - they are based on the BEM. Also I found a nice page with answers for common question related with BEM - <a target="_blank" href="http://getbem.com/faq/">click</a>.</p>
+</article>
