@@ -98,4 +98,80 @@ main > section > div > ul > li > a{
 
 ```
 
+<p>Now have a look for more complicated example</p>
+
+```html:title=example-5
+<footer class="footer">
+  <address class="footer__addressPart">
+    <p class="paragraph">You can contact author at <a class="link" href="http://www.somedomain.com/contact">
+    www.somedomain.com</a></p>
+    <p class="paragraph">If you see any bugs, please <a class="link" href="mailto:webmaster@somedomain.com">
+    contact webmaster</a></p>
+    <p class="paragraph">You may also want to visit us: Mozilla Foundation 331 E Evelyn Ave Mountain View, CA 94041 USA</p>
+  </address>
+  <form action="" class="contactForm footer__contactPart">
+    <label class="contactForm__label" for="name">Your name</label>
+    <input type="text" class="contactForm__input" id="name">
+    
+    <label class="contactForm__label" for="email">Your email</label>
+    <input type="text" class="contactForm__input" id="email">
+    
+    <label class="contactForm__label" for="question">Your question</label>
+    <textarea type="text" class="contactForm__textarea" id="question"></textarea>
+    
+    <button class="btn contactForm__send contactForm__send--lighter">Send!</button>
+  </form>
+  <p class="paragraph footer__rightsReserved">copyright © 2011 . All rights reserved.</p>
+</footer>
+}
+
+```
+
+<p>Ok, so I hope first two classes(for footer and address) are understandable, but why &#60;p&#62; doesn't have class like <q>footer__paragraph</q>? Because in my opinion &#60;p&#62; elelemt is a coherent, separate and reusable part of something bigger so I treat it as a block(not directly related to footer element). The same about links - I treat them <q>globally</q> - they are not related with one concrete element(same as &#60;p&#62;). The next element is &#60;form&#62; and it has two classes - <q>contactForm></q>(points to block) and <q>footer__contactPart</q>(points to element) - WTF what is this? The single part of the page can be both block and element - <q>contactForm></q> is a coherent, separate and reusable part of something bigger and can be used wherever on the page(as a single component) when <q>footer__contactPart</q> says that it is an element of &#60;footer&#62;(related with this footer) - something like that names <q>mixes</q>(more about mixes <a target="_blank" href="https://en.bem.info/forum/4/">here</a>) - we can noticed mixes also in the last &#60;p&#62; element. The last intresting thing is about &#60;button&#62; - there is block, element and modifier(and it's just a nice mix). Why a block(<q>btn</q> class)? Cuz it is a coherent, separate and reusable part of something bigger and can be used wherever on the page. Why en element(<q>contactForm__send</q>)? Cuz it is related with &#60;form&#62;. Why a modifier(<q>contactForm__send--lighter</q>)? Cuz on the hover I change something - notice the fact this modifier concerns only an element(modifies only an element) - there is no relation between modifier and block class(<q>btn</q>).
+
+And the styles for it:
+</p>
+
+```css:title=example-6
+body{
+  text-align: center;
+}
+.footer{
+  border: 3px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer__addressPart{
+  width: 45%;
+}
+.footer__contactPart{
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contactForm__label{
+  display: block;
+  width: 100%;
+}
+.contactForm__textarea{
+  width: 90%;
+  height: 100px;
+  margin: 0 4%;
+}
+.contactForm__textarea{
+  resize: none;
+}
+.btn{
+  display: block;
+}
+.contactForm__send--lighter:hover{
+  color: yellow;
+}
+
+```
+
 </article>
