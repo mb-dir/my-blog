@@ -11,3 +11,28 @@ tags:
   <h2>Introduction</h2>
   <p>Loops are one of the most basic thing in each programing language. Despite of <q>classic</q> loops like <strong>for</strong>, <strong>while</strong>, <strong>do...while</strong> there are some characteristic loops for JS like <strong>for...in</strong>, <strong>for...of</strong>, <strong>forEach</strong>, and in this post I am going to explain it for you.</p>
 </article>
+
+<article>
+  <h2>Classic loops</h2>
+  <p><strong>for</strong>, <strong>while</strong>, <strong>do...while</strong> are in mostly programing language, and they were described million times, but as a matter of principle I will describe them as well.</p>
+
+  <p>So <strong>for</strong> loop looks like:</p>
+
+```js:title=example-1
+for(iterator_declaration; condition; incrementation/decrementation_of_iterator){
+  //body
+}
+```
+
+<p>And this loop <q>lives</q> until the condition is true, have a look at a simple example:</p>
+
+```js:title=example-2
+for(let i = -12; i <= 12; i++){
+  console.log(i);
+}
+```
+
+<p>And our output is: -12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12</p>
+
+<p>But there is some let's say <q>nuisance<q> related with iterator_declaration - do you know? I will tell you at the end of this post.</p>
+</article>
