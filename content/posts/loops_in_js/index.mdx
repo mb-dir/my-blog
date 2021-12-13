@@ -34,5 +34,25 @@ for(let i = -12; i <= 12; i++){
 
 <p>And our output is: -12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12</p>
 
-<p>But there is some let's say <q>nuisance<q> related with iterator_declaration - do you know? I will tell you at the end of this post.</p>
+<p>But there is some let's say <q>nuisance</q> related with iterator_declaration - do you know? I will tell you at the end of this post.</p>
+
+<p>Okey, let's go to <strong>while</strong>, it looks like: </p>
+
+```js:title=example-3
+while(condition){
+  //body
+}
+```
+<p>And <strong>while</strong> is performed until the codition is true - the main diffrence between <strong>while</strong> and <strong>for</strong> is that <strong>for</strong> has an iterator by default, of course we can easly rewrite the code from <strong>for</strong> example to <strong>while</strong> implementation:</p>
+
+```js:title=example-4
+let i = -12;
+while(i <= 12){
+  console.log(i);
+  i++;
+}
+```
+
+<p>And result will be the same.</p>
+
 </article>
