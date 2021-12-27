@@ -73,3 +73,24 @@ while(false){
 <p>Shows nothing.</p>
 
 </article>
+
+<article>
+  <h2>for...in</h2>
+
+  <p>This loop has a lot to do with objects, namely <strong>for...in</strong> goes throught keys of object, so something like this: </p>
+
+```js:title=example-7
+const person = {
+  name: "Joe",
+  age: 19,
+  favoriteFood: "pizza",
+}
+
+for(const key in person){
+  console.log(key);
+}
+```
+
+<p>returnes: name, age, favoriteFood</p>
+
+</article>
