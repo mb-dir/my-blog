@@ -109,3 +109,20 @@ for(const name of names){
 ```
 
 </article>
+
+<article>
+  <h2>forEach</h2>
+
+  <p>This loop is slightly diffrent from the previous ones. forEach is not <q>independent</q> loop, it is the method, which is avaliable for arrays. forEach takes so-called <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" target="_blank">collback</a>, which takes three arguments, an element, an index, and the entire array (optional). forEach executes the collback for each of the element in ana array, look here:</p>
+
+```js:title=example-9
+const numbers = ["H", "e", "l", "l", "o"];
+numbers.forEach((el, i, arr)=>{
+  console.log(`We are in array: ${arr}, our current index is: ${i}, and under this index is ${el} element`);
+});
+```
+
+<p>And the result:</p>
+<img class="fit-picture" src="./forEach-result.jpg" alt="Photo shows the result of an above example with forEach"/>
+
+</article>
