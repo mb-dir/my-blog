@@ -126,3 +126,42 @@ numbers.forEach((el, i, arr)=>{
 <img class="fit-picture" src="./forEach-result.jpg" alt="Photo shows the result of an above example with forEach"/>
 
 </article>
+
+<article>
+  <h2>for vs forEach</h2>
+  <p>It is not hard to see that <strong>for</strong> and <strong>forEach</strong> have a lot to do with arrays(forEach is an array method, for is the most popular way of iterating throught an array). At the first glance there is no a big diffrence between then, maybe <strong>forEach</strong> is a little bit more easier to read, but (ofcourse) there are some small(or bigger) diffrences between those two types of loops.</p>
+
+  <p>First of all there is a problem with our iterator_declaration when we use var as a keyword in <strong>for</strong>(I know, I know - who uses var nowadays when we have let and const - but in the old project you can still met var, so it is better to know something about this <q>great</q> keyword). Look at those examples:</p>
+
+```js:title=example-10
+let i = 13;
+
+for(let i = 1; i < 5; i++){
+  console.log(i);
+}
+console.log(i);
+
+//result 1,2,3,4,13
+```
+
+```js:title=example-11
+var i = 13;
+
+for(var i = 1; i < 5; i++){
+  console.log(i);
+}
+console.log(i);
+
+//result 1,2,3,4,5
+```
+
+<p>Almost the same code, and slightly diffrent result - but why? The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for#syntax">documentation</a> says iterator declaration is:</p>
+
+<blockquote cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">
+<p>An expression (including assignment expressions) or variable declaration evaluated once before the loop begins. Typically used to initialize a counter variable. This expression may optionally declare new variables with var or let keywords. Variables declared with var are not local to the loop, i.e. they are in the same scope the for loop is in. Variables declared with let are local to the statement.</p>
+</blockquote>
+
+<p>Now everything is clear. When we use var we are(in this case) in global scope, and the var inside the loop overwrite the var outside the loop. So why the last value which we see is 5? Let's analyze the lasts steps which happens in this loop(from the step where i = 4): i = 4, 4 &#60; 5(TRUE) so do console.log and i++ ---&#62; i = 5, 5 &#60; 5(FALSE) so do not go inside the loop body, and the i value = 5, so that's why the last value in our example is 5.
+</p>
+
+</article>
