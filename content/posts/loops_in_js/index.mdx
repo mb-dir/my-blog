@@ -1,6 +1,6 @@
 ---
 title: Types of loops in JS
-date: 2021-11-08
+date: 2022-01-21
 timeToRead: 10
 description: Post in which I describe loops in JavaScript
 tags:
@@ -77,7 +77,7 @@ while(false){
 <article>
   <h2>for...in</h2>
 
-  <p>This loop has a lot to do with objects, namely <strong>for...in</strong> goes throught keys of object, so something like this: </p>
+  <p>This loop has a lot to do with objects, namely <strong>for...in</strong> goes through keys of object, so something like this: </p>
 
 ```js:title=example-7
 const person = {
@@ -91,14 +91,14 @@ for(const key in person){
 }
 ```
 
-<p>returnes: name, age, favoriteFood</p>
+<p>returns: name, age, favoriteFood</p>
 
 </article>
 
 <article>
   <h2>for...of</h2>
 
-  <p>It is like automatick iteration throught iterable object(array, string, DOM collections, and overall all collections with <a href="https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Iterators_and_Generators" target="_blank">interator</a>). Look on simple example: </p>
+  <p>It is like automatick iterate through iterable object(array, string, DOM collections, and overall all collections with <a href="https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Iterators_and_Generators" target="_blank">interator</a>). Look on simple example: </p>
 
 ```js:title=example-8
 const names = ["Joe", "Mike", "Piter", "Kyle"];
@@ -113,7 +113,7 @@ for(const name of names){
 <article>
   <h2>forEach</h2>
 
-  <p>This loop is slightly diffrent from the previous ones. forEach is not <q>independent</q> loop, it is the method, which is avaliable for arrays. forEach takes so-called <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" target="_blank">collback</a>, which takes three arguments, an element, an index, and the entire array (optional). forEach executes the collback for each of the element in ana array, look here:</p>
+  <p>This loop is slightly different from the previous ones. forEach is not <q>independent</q> loop, it is the method, which is available for arrays. forEach takes so-called <a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" target="_blank">callback</a>, which takes three arguments, an element, an index, and the entire array (optional). forEach executes the callback for each of the element in ana array, look here:</p>
 
 ```js:title=example-9
 const numbers = ["H", "e", "l", "l", "o"];
@@ -129,7 +129,7 @@ numbers.forEach((el, i, arr)=>{
 
 <article>
   <h2>for vs forEach</h2>
-  <p>It is not hard to see that <strong>for</strong> and <strong>forEach</strong> have a lot to do with arrays(forEach is an array method, for is the most popular way of iterating throught an array). At the first glance there is no a big diffrence between then, maybe <strong>forEach</strong> is a little bit more easier to read, but (ofcourse) there are some small(or bigger) diffrences between those two types of loops.</p>
+  <p>It is not hard to see that <strong>for</strong> and <strong>forEach</strong> have a lot to do with arrays(forEach is an array method, for is the most popular way of iterating through an array). At the first glance there is no a big diffrence between then, maybe <strong>forEach</strong> is a little bit more easier to read, but (ofcourse) there are some small(or bigger) diffrences between those two types of loops.</p>
 
   <p>First of all there is a problem with our iterator_declaration when we use var as a keyword in <strong>for</strong>(I know, I know - who uses var nowadays when we have let and const - but in the old project you can still met var, so it is better to know something about this <q>great</q> keyword). Look at those examples:</p>
 
@@ -155,7 +155,7 @@ console.log(i);
 //result 1,2,3,4,5
 ```
 
-<p>Almost the same code, and slightly diffrent result - but why? The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for#syntax">documentation</a> says iterator declaration is:</p>
+<p>Almost the same code, and slightly different result - but why? The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for#syntax">documentation</a> says iterator declaration is:</p>
 
 <blockquote cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">
 <p>An expression (including assignment expressions) or variable declaration evaluated once before the loop begins. Typically used to initialize a counter variable. This expression may optionally declare new variables with var or let keywords. Variables declared with var are not local to the loop, i.e. they are in the same scope the for loop is in. Variables declared with let are local to the statement.</p>
@@ -166,7 +166,7 @@ console.log(i);
 
 <p>What about forEach and this problem? Nothing, forEach(same as for loop with let) keeps the variable’s scope to the block.</p>
 
-<p>Another diffrence between those two ways of iterating throught array is that using for loop we can iterate only throught designated elements - using for we can easily iterate for example for 2ns element, or iterate from the end.
+<p>Another difference between those two ways of iterating through array is that using for loop we can iterate only through designated elements - using for we can easily iterate for example for 2ns element, or iterate from the end.
 
 ```js:title=example-12
 const arr = ["H", "E", "L", "L","O", "W", "O", "R", "L", "D"];
@@ -181,8 +181,25 @@ We cannot do it using forEach.
 
 </p>
 
-<p>Important diffrence is that <strong>forEach</strong> doesn't <q>respect</q> the <strong>break</strong> and <strong>continue</strong> key words. That means <strong>forEach</strong> goes always throught all elements in the array and we do not have the control about it.</p>
+<p>Important difference is that <strong>forEach</strong> doesn't <q>respect</q> the <strong>break</strong> and <strong>continue</strong> key words. That means <strong>forEach</strong> goes always through all elements in the array and we do not have the control about it.</p>
 
-<p>So in general <strong>for</strong> loop is easier to read for begginers, it is also more <q>elastic</q>(<strong>break</strong>, <strong>continue</strong> key words and the fact that we can control the condition) and it could be used not only for iterating throught the array. <strong>forEach</strong> whereas is easier to read for more expirence programers, is more rigid, and is closely related to arrays(more specifically talking with objects containing an iterator).</p>
+<p>So in general <strong>for</strong> loop is easier to read for begginers, it is also more <q>elastic</q>(<strong>break</strong>, <strong>continue</strong> key words and the fact that we can control the condition) and it could be used not only for iterating through the array. <strong>forEach</strong> whereas is easier to read for more experience programers, is more rigid, and is closely related to arrays(more specifically talking with objects containing an iterator).</p>
 
+</article>
+
+<article>
+<h2>Summary</h2>
+<p>Loops are good things, we have to respect them and remember to use this type of loop which is the most appropriate in a given situation. And now I will write about the <q>nuisance</q> related with <strong>for</strong> - we cannot use <strong>const</strong> as a key word in iterator_declaration - why? Cuz <strong>const</strong> is not overwritable - I mean we cannot increment the value of the <strong>const</strong> so something like that:
+
+```js:title=example-13
+const arr = ["H", "E", "L", "L","O", "W", "O", "R", "L", "D"];
+
+for(const i = 5; i < 10; i++){
+  console.log(arr[i]);//WORLD
+}
+
+```
+
+will return an error.
+</p>
 </article>
