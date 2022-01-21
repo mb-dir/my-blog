@@ -161,7 +161,28 @@ console.log(i);
 <p>An expression (including assignment expressions) or variable declaration evaluated once before the loop begins. Typically used to initialize a counter variable. This expression may optionally declare new variables with var or let keywords. Variables declared with var are not local to the loop, i.e. they are in the same scope the for loop is in. Variables declared with let are local to the statement.</p>
 </blockquote>
 
-<p>Now everything is clear. When we use var we are(in this case) in global scope, and the var inside the loop overwrite the var outside the loop. So why the last value which we see is 5? Let's analyze the lasts steps which happens in this loop(from the step where i = 4): i = 4, 4 &#60; 5(TRUE) so do console.log and i++ ---&#62; i = 5, 5 &#60; 5(FALSE) so do not go inside the loop body, and the i value = 5, so that's why the last value in our example is 5.
+<p>Now everything is clear. When we use var we are(in this case) in global scope, and the var inside the loop overwrite the var outside the loop. So why the last value which we see is 5? Let's analyze the lasts steps which happens in this loop(from the step where i = 4): i = 4, 4 &#60; 5(TRUE) so do console.log and i++ ---&#62; i = 5, 5 &#60; 5(FALSE) so do not go inside the loop body, and the i value = 5, so that's why the last value in our example is 5. When it comes to let keyword there is no such a problem - the variable declared in the loop has scope of this loop(the fact that let statement declares a block-scoped local variable is one of the biggest advantage over var keyword - but it is topic for other post).
 </p>
+
+<p>What about forEach and this problem? Nothing, forEach(same as for loop with let) keeps the variable’s scope to the block.</p>
+
+<p>Another diffrence between those two ways of iterating throught array is that using for loop we can iterate only throught designated elements - using for we can easily iterate for example for 2ns element, or iterate from the end.
+
+```js:title=example-12
+const arr = ["H", "E", "L", "L","O", "W", "O", "R", "L", "D"];
+
+for(let i = 5; i < 10; i++){
+  console.log(arr[i]);//WORLD
+}
+
+```
+
+We cannot do it using forEach.
+
+</p>
+
+<p>Important diffrence is that <strong>forEach</strong> doesn't <q>respect</q> the <strong>break</strong> and <strong>continue</strong> key words. That means <strong>forEach</strong> goes always throught all elements in the array and we do not have the control about it.</p>
+
+<p>So in general <strong>for</strong> loop is easier to read for begginers, it is also more <q>elastic</q>(<strong>break</strong>, <strong>continue</strong> key words and the fact that we can control the condition) and it could be used not only for iterating throught the array. <strong>forEach</strong> whereas is easier to read for more expirence programers, is more rigid, and is closely related to arrays(more specifically talking with objects containing an iterator).</p>
 
 </article>
