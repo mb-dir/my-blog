@@ -11,3 +11,172 @@ tags:
   <h2>Introduction</h2>
   <p>Today we are going to practie JavaScript! Whooo! We will write a simple benefits analisis app. I do not want to create another to-do app so I used a little of my creativity and I came up with something else. How will this app work? There will be two <q>boxes</q>, one for pluses, and one for minuses. The user will be able to enter the advantage or disadvantage of the decision and define the <q>importance</q> of that plus/minus(on a scale of 1 to 3, where 1 means it is not big advantage/disadvantage, 3 means it is big advantage/disadvantage). The app will sum up the <q>weight</q> of pluses and minuses and will show the information if the decision is good or bad for us. By the way this post is the first from series about modules, but more on that later. Let's go to the code!</p>
 </article>
+
+<article>
+  <h2>HTML</h2>
+  <p>Let's start with some HTML structure, first of all we will make a header part in order to <q>introduce</q> the app for user:</p>
+
+```html:title=HTML-1
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+</body>
+```
+  <p>Pay attention for &#60;p&#62; element, there are two classes - one treats this element as a block, second as an element.</p>
+
+  <p>Okey let's define now main part of app. There will be two section - one for form in which user will put the data like importance scale etc. Ine the second section will be two boxes(for pluses and minuses) where will be agruments which user has specified whether to treat it as a plus or a minus. And the last thing in main section will be the paragraph with information about the profitability of this decision. Every element which is useful when it comes to JavaScript has a special id in order to have access to him from JavaScript. Let's add the first section:</p>
+
+```html:title=HTML-2
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+  </main>
+</body>
+```
+
+<p>It is form with three inputs - one texttype, there user can write what he treats as the plus/minus. The another two are selecttype - in the first user can choose the type of argument(plus/minus) and the last one is about the importance sclale - how important this argument is for user.</p>
+
+<p>Let's go to the second section:</p>
+
+```html:title=HTML-3
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+
+    <section class="benefitsApp__boxes">
+      <div class="box benefitsApp__plusBox">
+        <h2 class="benefitsApp__header">Pluses</h2>
+        <ul class="benefitsApp__list" id="plusesList">
+        </ul>
+      </div>
+      <div class="box benefitsApp__minusBox">
+        <h2 class="benefitsApp__header">Minuses</h2>
+        <ul class="benefitsApp__list" id="minusesList">
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+```
+
+<p>There are two boxes - for pluses and minuses. The &#60;ul&#62; is perfect for storing several related elements(it's a list after all) so they have an unique id - we will use them in js.</p>
+
+<p>The last thing we have to do is create the container(paragraph) for information if this decision is good or even bad. So create it.</p>
+
+```html:title=HTML-4
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+
+    <section class="benefitsApp__boxes">
+      <div class="box benefitsApp__plusBox">
+        <h2 class="benefitsApp__header">Pluses</h2>
+        <ul class="benefitsApp__list" id="plusesList">
+        </ul>
+      </div>
+      <div class="box benefitsApp__minusBox">
+        <h2 class="benefitsApp__header">Minuses</h2>
+        <ul class="benefitsApp__list" id="minusesList">
+        </ul>
+      </div>
+    </section>
+    <p id="finalDecision" class="paragraph benefitsApp__finalDecision"></p>
+  </main>
+</body>
+```
+
+<p>This element also will be modified in js so I have added an id for it. Okey it is the whole HTML structure, as you can see I have used <a href="https://myblog96921.gatsbyjs.io/bem-basics" target="_blank">BEM</a> so there is room for interpretation but I hope this structure is understandable for you.</p>
+
+</article>
