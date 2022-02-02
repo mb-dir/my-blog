@@ -289,3 +289,18 @@ tags:
 
   <p>Let's code something!</p>
 </article>
+
+<article>
+  <h2>JS code</h2>
+  <p>We will start with getting refference to the form and adding eventListener on submit:</p>
+
+```js:title=JS-1
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+});
+```
+
+<p>Of course we do not have to forget about stopping the default action of submit event - without <q>e.preventDefault();</q> the form will be sent, and our application will re-load.</p>
+</article>
