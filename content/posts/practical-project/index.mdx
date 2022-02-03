@@ -336,4 +336,64 @@ analisisForm.addEventListener("submit", (e)=>{
 });
 ```
 
+<p>Okey so we have an appropriate list item, but now we have to decide where(to which box) this item will be added. So we have to get refference to our plus/minus boxes and then we check the <q>typeSelect</q> in order to put the list item to an appropriate box.</p>
+
+```js:title=JS-4
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+  }else{
+    minusesList.appendChild(listElement);
+  }
+
+});
+```
+
+<p>As you can see those variables are outside the form - there is no need to get the refference to them with every form send. We have to know in which box the sum of importance is bigger in order to show a suitable communicate for user. We need to create two variable where we will keep the sum of pluses/minuses importance.</p>
+
+```js:title=JS-5
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+let plusesSum = 0;
+let minusesSum = 0;
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+    plusesSum+=importanceSelect;
+  }else{
+    minusesList.appendChild(listElement);
+    minusesSum+=importanceSelect;
+  }
+
+});
+```
+
+<p>At this point our app create a suitable list item, put it into a right box and count the importances, but doesn't show it yet - let's change it!</p>
+
 </article>
