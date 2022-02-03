@@ -396,4 +396,49 @@ analisisForm.addEventListener("submit", (e)=>{
 
 <p>At this point our app create a suitable list item, put it into a right box and count the importances, but doesn't show it yet - let's change it!</p>
 
+<p>We have such an element in our HTML: </p>
+
+```html:title=HTML-5
+<p id="finalDecision" class="paragraph benefitsApp__finalDecision"></p>
+```
+<p>So let's use it:</p>
+
+```js:title=JS-5
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+const finalDecision = document.querySelector("#finalDecision");
+let plusesSum = 0;
+let minusesSum = 0;
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+    plusesSum+=importanceSelect;
+  }else{
+    minusesList.appendChild(listElement);
+    minusesSum+=importanceSelect;
+  }
+
+  if(plusesSum>minusesSum){
+    finalDecision.innerHTML = "The sum of importance is bigger for pluses";
+  }else if(plusesSum === minusesSum){
+    finalDecision.innerHTML = "50/50";
+  }else{
+    finalDecision.innerHTML = "The sum of importance is bigger for minuses";
+  }
+});
+```
+
+<p>We have gotten the refference to the place where the information will be shown and based on condition with pluses and minuses sum put an appropriate comunicate to this paragraph.</p>
 </article>
