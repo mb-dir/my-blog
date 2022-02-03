@@ -303,4 +303,37 @@ analisisForm.addEventListener("submit", (e)=>{
 ```
 
 <p>Of course we do not have to forget about stopping the default action of submit event - without <q>e.preventDefault();</q> the form will be sent, and our application will re-load.</p>
+
+<p>Now we will save informations from form in variables:</p>
+
+```js:title=JS-2
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+});
+```
+
+<p>Notice that the <q>importanceSelect</q> value is parse to number type. Now let's create an appropriate list item based on above variables.</p>
+
+```js:title=JS-3
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+});
+```
+
 </article>
