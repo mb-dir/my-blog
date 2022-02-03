@@ -1,0 +1,449 @@
+---
+title: Simple practical project
+date: 2022-02-03
+timeToRead: 10
+description: Simple, interactive project using HTML, CSS and JS
+tags:
+  - JS
+  - Intermediate
+---
+<article>
+  <h2>Introduction</h2>
+  <p>Today we are going to practie JavaScript! Whooo! We will write a simple benefits analisis app. I do not want to create another to-do app so I used a little of my creativity and I came up with something else. How will this app work? There will be two <q>boxes</q>, one for pluses, and one for minuses. The user will be able to enter the advantage or disadvantage of the decision and define the <q>importance</q> of that plus/minus(on a scale of 1 to 3, where 1 means it is not big advantage/disadvantage, 3 means it is big advantage/disadvantage). The app will sum up the <q>weight</q> of pluses and minuses and will show the information if the decision is good or bad for us. By the way this post is the first from series about modules, but more on that later. Let's go to the code!</p>
+</article>
+
+<article>
+  <h2>HTML</h2>
+  <p>Let's start with some HTML structure, first of all we will make a header part in order to <q>introduce</q> the app for user:</p>
+
+```html:title=HTML-1
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+</body>
+```
+  <p>Pay attention for &#60;p&#62; element, there are two classes - one treats this element as a block, second as an element.</p>
+
+  <p>Okey let's define now main part of app. There will be two section - one for form in which user will put the data like importance scale etc. In the second section will be two boxes(for pluses and minuses) where will be arguments which user has specified whether to treat it as a plus or a minus. And the last thing in main section will be the paragraph with information about the profitability of this decision. Every element which is useful when it comes to JavaScript has a special id in order to have access to him from JavaScript. Let's add the first section:</p>
+
+```html:title=HTML-2
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+  </main>
+</body>
+```
+
+<p>It is form with three inputs - one text type, there user can write what he treats as the plus/minus. The another two are select type - in the first user can choose the type of argument(plus/minus) and the last one is about the importance scale - how important this argument is for user.</p>
+
+<p>Let's go to the second section:</p>
+
+```html:title=HTML-3
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+
+    <section class="benefitsApp__boxes">
+      <div class="box benefitsApp__plusBox">
+        <h2 class="benefitsApp__header">Pluses</h2>
+        <ul class="benefitsApp__list" id="plusesList">
+        </ul>
+      </div>
+      <div class="box benefitsApp__minusBox">
+        <h2 class="benefitsApp__header">Minuses</h2>
+        <ul class="benefitsApp__list" id="minusesList">
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+```
+
+<p>There are two boxes - for pluses and minuses. The &#60;ul&#62; is perfect for storing several related elements(it's a list after all) so they have an unique id - we will use them in js.</p>
+
+<p>The last thing we have to do is create the container(paragraph) for information if this decision is good or even bad. So create it.</p>
+
+```html:title=HTML-4
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+
+    <section class="benefitsApp__boxes">
+      <div class="box benefitsApp__plusBox">
+        <h2 class="benefitsApp__header">Pluses</h2>
+        <ul class="benefitsApp__list" id="plusesList">
+        </ul>
+      </div>
+      <div class="box benefitsApp__minusBox">
+        <h2 class="benefitsApp__header">Minuses</h2>
+        <ul class="benefitsApp__list" id="minusesList">
+        </ul>
+      </div>
+    </section>
+    <p id="finalDecision" class="paragraph benefitsApp__finalDecision"></p>
+  </main>
+</body>
+```
+
+<p>This element also will be modified in js so I have added an id for it. Okey it is the whole HTML structure, as you can see I have used <a href="https://myblog96921.gatsbyjs.io/bem-basics" target="_blank">BEM</a> so there is room for interpretation but I hope this structure is understandable for you.</p>
+
+</article>
+
+<article>
+  <h2>CSS</h2>
+  <p>I am not going to describe the CSS code - the truth is that you can style this HTML structureas you want, it is just my proposition(as you can see I am not design-talented). Tbh CSS is the less important in this projct. My CSS:</p>
+
+```css:title=CSS-1
+*,*::before, *::after{
+  box-sizing: border-box;
+}
+.app{
+  margin: 0;
+  padding: 0;
+  background-color: #0B1C48;
+  color: #f0fffe;
+  font-family: sans-serif;
+  text-align: center;
+}
+.benefitsApp{
+  margin-top: 50px;
+  width: 90%;
+  margin: 50px auto;
+}
+.benefitsApp__analysis{
+  margin-top: 40px;
+}
+.inputContainer__label{
+  /*  thanks to this input will be always under the label  */
+  display: block;
+  margin: 15px 0;
+}
+.inputContainer__input{
+  max-width: 300px;
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #0B1C48;
+  caret-color: #f0fffe;
+  color: #f0fffe;
+  border: none;
+  border-bottom: 2px solid #f0fffe;
+  outline: none;
+}
+.inputContainer__input:focus{
+  border-bottom: 2px solid #eb4034;
+}
+.btn{
+  margin: 15px;
+  background-color: #0B1C48;
+  color: #f0fffe;
+  border: 2px solid #f0fffe;
+}
+.btn:hover{
+  cursor: pointer;
+}
+.benefitsApp__boxes{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.box{
+  min-height: 200px;
+  margin-bottom: 30px;
+  width: 75%;
+  border: 1px solid green;
+}
+.benefitsApp__plusBox{
+  border: 2px solid #0ced48;
+  border-radius: 5px;
+}
+.benefitsApp__minusBox{
+  border: 2px solid #eb4034;
+  border-radius: 5px;
+}
+.benefitsApp__list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.benefitsApp__point{
+  margin: 8px;
+}
+
+@media (min-width: 768px){
+  .benefitsApp__boxes{
+    justify-content: space-around;
+  }
+  .box{
+    width: 45%;
+  }
+}
+```
+
+<p>At this point the project should looks like <a href="https://codepen.io/mb-dir/pen/abVvEmY" target="_blank">there</a>.</p>
+</article>
+
+<article>
+  <h2>What we want to implement</h2>
+  <p>Okey, so let's think what we need to implement. First of all we need to get the information from user, so we have to handle the form with submit event, and then we can get information from user. We will have to also create an appropriate list element based on informations from user and decide if this item has to go to pluses container or minuses container. We also have to remember about increasing the importance sum for pluses and minuses. At the last step the app will show an appropriate communique(depending on the sum of pluses/minuses) to user. Let's put the above informations together and present it as a list:</p>
+  <ol>
+    <li>Handling submit event on form</li>
+    <li>Extracting the necessary informations from the form</li>
+    <li>Updating the state of sum of importance for pluses and minuses</li>
+    <li>Creating the list element and adding it into an appropriate box</li>
+    <li>Showing the information about the profitability of the decision to user.</li>
+  </ol>
+
+  <p>Let's code something!</p>
+</article>
+
+<article>
+  <h2>JS code</h2>
+  <p>We will start with getting reference to the form and adding eventListener on submit:</p>
+
+```js:title=JS-1
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+});
+```
+
+<p>Of course we do not have to forget about stopping the default action of submit event - without <q>e.preventDefault();</q> the form will be sent, and our application will re-load.</p>
+
+<p>Now we will save informations from form in variables:</p>
+
+```js:title=JS-2
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+});
+```
+
+<p>Notice that the <q>importanceSelect</q> value is parse to number type. Now let's create an appropriate list item based on above variables.</p>
+
+```js:title=JS-3
+const analisisForm = document.querySelector("#analisisForm");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+});
+```
+
+<p>Okey so we have an appropriate list item, but now we have to decide where(to which box) this item will be added. So we have to get reference to our plus/minus boxes and then we check the <q>typeSelect</q> in order to put the list item to an appropriate box.</p>
+
+```js:title=JS-4
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+  }else{
+    minusesList.appendChild(listElement);
+  }
+
+});
+```
+
+<p>As you can see those variables are outside the form - there is no need to get the reference to them with every form send. We have to know in which box the sum of importance is bigger in order to show a suitable communique for user. We need to create two variable where we will keep the sum of pluses/minuses importance.</p>
+
+```js:title=JS-5
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+let plusesSum = 0;
+let minusesSum = 0;
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+    plusesSum+=importanceSelect;
+  }else{
+    minusesList.appendChild(listElement);
+    minusesSum+=importanceSelect;
+  }
+
+});
+```
+
+<p>At this point our app create a suitable list item, put it into a right box and count the importances, but doesn't show it yet - let's change it!</p>
+
+<p>We have such an element in our HTML: </p>
+
+```html:title=HTML-5
+<p id="finalDecision" class="paragraph benefitsApp__finalDecision"></p>
+```
+<p>So let's use it:</p>
+
+```js:title=JS-5
+const analisisForm = document.querySelector("#analisisForm");
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+const finalDecision = document.querySelector("#finalDecision");
+let plusesSum = 0;
+let minusesSum = 0;
+
+analisisForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+
+  const decisionArgument = document.querySelector("#decision").value;
+  const typeSelect = document.querySelector("#typeSelect").value;
+  const importanceSelect = parseInt(document.querySelector("#importanceSelect").value);
+
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if(typeSelect === "plus"){
+    plusesList.appendChild(listElement);
+    plusesSum+=importanceSelect;
+  }else{
+    minusesList.appendChild(listElement);
+    minusesSum+=importanceSelect;
+  }
+
+  if(plusesSum>minusesSum){
+    finalDecision.innerHTML = "The sum of importance is bigger for pluses";
+  }else if(plusesSum === minusesSum){
+    finalDecision.innerHTML = "50/50";
+  }else{
+    finalDecision.innerHTML = "The sum of importance is bigger for minuses";
+  }
+});
+```
+
+<p>We have gotten the reference to the place where the information will be shown and based on condition with pluses and minuses sum put an appropriate communique to this paragraph.</p>
+</article>
+
+<article>
+  <h2>Summary</h2>
+  <p><a href="https://codepen.io/mb-dir/pen/OJOPLva?editors=0010" target="_blank">There</a> is a full code. We have just created simple pure JS app. We have used the most common JS concepts like DOM api, events, template literals, etc. I hope you have enjoyed this project. Of course you can <q>upgrade</q> this app by adding(for example) possibility to delete items from plus/minus box.</p>
+</article>
