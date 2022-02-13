@@ -27,3 +27,15 @@ tags:
   <h2>What exactly is a module?</h2>
   <p>So far I have used several times the “module” expression, but what is module, and what are the differences between module and script? Generally module is a kind of close environment in which we have control over what goes out of module. The unique characteristic of module is fact  od exporting something(function, object, etc). Despite of this there are a lot of differences, eg, modules are always in strict mode, modules are loaded asynchronously(they do not block the parse), the value of this === undefined at the outer scope (not window). More information <a href="https://stackoverflow.com/questions/39652618/classic-scripts-vs-module-scripts-in-javascript" target="_blank">here</a>. Actually JS has its own native <a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/" target="_blank">modules</a>, so using them do not require using other external tools.</p>
 </article>
+
+<article>
+  <h2>Why splitting code with normal script is not good?</h2>
+  <p>Someone can ask why we have to play with some modules, cuz we only need to create several .js file and attach them to our page – effect(theoretically) the same. In fact this solution will work, but it has a few side effects. We need to attach those scripts in the appropriate order – let’s assume that we have a script which dynamically adds some element to the page(eg button) – call him x.js and the second script in which we get the reference to this added element and add listener to him – call it y.js – if the attach order looks like:</p>
+
+```html:title=HTML-1
+<script src="./x.js"></script>
+<script src="./y.js"></script>
+```
+
+<p>Everything works well, however, it is enough if the order is different to get the error that in y.js we are trying to get a reference to an element that does not exist. In the case of modules, there is no such problem, we have one main file to which we import what we need.</p>
+</article>
