@@ -11,3 +11,14 @@ tags:
   <h2>Introduction</h2>
   <p>In the previous <a href="https://myblog96921.gatsbyjs.io/simple-practical-project" target="_blank">post</a> we created a simple practical project in pure JS. This project was created in the simplest possible way – the whole JS code was in one file, such an approach to writing code is not optimal(especially for a little bigger project). It would be optimal to divide the code into smaller(reusable) parts. In this post I will try to explain this way of coding and bring closer the native modules in JS.</p>
 </article>
+
+<article>
+  <h2>Why do we need (and when) split the code?</h2>
+  <p>The practice of code splitting works great in the projects which are more extensive, and it is not about a giant app like facebook, even with seemingly projects(but which do more than one thing) code splitting is very useful. There is one basic rule to remember – each module does one concrete thing, avoid creating module which has more than one responsibility, such a practice is just stupid and can cause more confusion on the code.</p>
+
+  <p>The main advantage of the modules is that for each task which our app has to do we create a separate file with code. Thanks to this the whole app(code) is more understandable not only for other programmer, but also for us from the future. The division into modules makes it easier for us to fide the piece of code which we are looking for, thanks to which we can start our work faster, and without unless frustraction.</p>
+
+  <p>Another important thing are errors, or rather finding them. One big file is much more difficult to debug than a few smaller ones. Especially when we know what doesn’t work – eg we see that cookie modal doesn’t disappear despite of clicking the X button, so we know where we have to go in the code in order to fix it.</p>
+
+  <p>No less important is the data encapsulation. This scary-sounding word simply means restricting the access to variables form other module(variable x in module y is available only in module y, we cannot use it in module z(unless there is also a variable x in module z, but then they are two different variables)) – thanks to this we reduce the risk of overwriting the variable, naming conflicts or other unexpected errors.</p>
+</article>
