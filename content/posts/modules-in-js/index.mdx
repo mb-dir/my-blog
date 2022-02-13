@@ -22,3 +22,8 @@ tags:
 
   <p>No less important is the data encapsulation. This scary-sounding word simply means restricting the access to variables form other module(variable x in module y is available only in module y, we cannot use it in module z(unless there is also a variable x in module z, but then they are two different variables)) – thanks to this we reduce the risk of overwriting the variable, naming conflicts or other unexpected errors.</p>
 </article>
+
+<article>
+  <h2>What exactly is a module?</h2>
+  <p>So far I have used several times the “module” expression, but what is module, and what are the differences between module and script? Generally module is a kind of close environment in which we have control over what goes out of module. The unique characteristic of module is fact  od exporting something(function, object, etc). Despite of this there are a lot of differences, eg, modules are always in strict mode, modules are loaded asynchronously(they do not block the parse), the value of this === undefined at the outer scope (not window). More information <a href="https://stackoverflow.com/questions/39652618/classic-scripts-vs-module-scripts-in-javascript" target="_blank">here</a>. Actually JS has its own native <a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/" target="_blank">modules</a>, so using them do not require using other external tools.</p>
+</article>
