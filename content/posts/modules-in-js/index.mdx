@@ -44,3 +44,103 @@ tags:
   <h2>Module vs script - sum up</h2>
   <p>I suspect that my above explanations may not be clear enough, so I'll try to sum it up. Generally when it comes to modules we attach only one file to our .html file and everything else what we need we import to this file, we can import something to this main file if this value is export from other file - everything is connected together. When it comes to non-module approach we attach everything in our .html file and that makes that there is no relationship between parts of our code.</p>
 </article>
+
+<article>
+  <h2>Simple modules presentation</h2>
+  <p>Ok, so let's write some really basic example for showing how to use modules in practice. Let's assume we have a basic HTML structure like this:</p>
+
+```html:title=HTML-2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button>Add</button>
+  </form>
+
+  <script src="./main.js"></script>
+  <script src="./sum.js"></script>
+</body>
+</html>
+```
+
+<p>And two js files - one main file, and one with auxiliary function</p>
+
+```js:title=JS-1
+//main.js
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const a = parseInt(document.querySelector("#a").value);
+  const b = parseInt(document.querySelector("#b").value);
+  sum(a,b);
+});
+
+```
+
+```js:title=JS-2
+//sum.js
+function sum(a,b){
+  alert(a+b);
+}
+
+```
+
+<p>Now we change it into modules. Let magic happen! Firstly we have to decide which js file is our entrypoint - in our case it is main.js, so let's change the script into module.</p>
+
+```html:title=HTML-3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button>Add</button>
+  </form>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
+```
+<p>Voilà, now we have to connect main and sum file together. We will export sum function from sum.js, then import it into main.js and use it.</p>
+
+```js:title=JS-3
+//sum.js
+function sum(a,b){
+  alert(a+b);
+}
+
+export default sum;
+
+```
+
+```js:title=JS-4
+//main.js
+import sum from "./sum.js";
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const a = parseInt(document.querySelector("#a").value);
+  const b = parseInt(document.querySelector("#b").value);
+  sum(a,b);
+});
+
+```
+<p>This simple change gives as all benefits which I have written above.</p>
+</article>
