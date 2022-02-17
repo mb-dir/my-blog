@@ -1,0 +1,151 @@
+---
+title: Modules in JS
+date: 2022-02-17
+timeToRead: 10
+description: Post about native modules in JS
+tags:
+  - JS
+  - Intermediate
+---
+<article>
+  <h2>Introduction</h2>
+  <p>In the previous <a href="https://myblog96921.gatsbyjs.io/simple-practical-project" target="_blank">post</a> we created a simple practical project in pure JS. This project was created in the simplest possible way – the whole JS code was in one file, such an approach to writing code is not optimal(especially for a little bigger project). It would be optimal to divide the code into smaller(reusable) parts. In this post I will try to explain this way of coding and bring closer the native modules in JS.</p>
+</article>
+
+<article>
+  <h2>Why do we need (and when) split the code?</h2>
+  <p>The practice of code splitting works great in the projects which are more extensive, and it is not about a giant app like facebook, even with seemingly projects(but which do more than one thing) code splitting is very useful. There is one basic rule to remember – each module does one concrete thing, avoid creating module which has more than one responsibility, such a practice is just stupid and can cause more confusion on the code.</p>
+
+  <p>The main advantage of the modules is that for each task which our app has to do we create a separate file with code. Thanks to this the whole app(code) is more understandable not only for other programmer, but also for us from the future. The division into modules makes it easier for us to fide the piece of code which we are looking for, thanks to which we can start our work faster, and without unless frustration.</p>
+
+  <p>Another important thing are errors, or rather finding them. One big file is much more difficult to debug than a few smaller ones. Especially when we know what doesn’t work – eg we see that cookie modal doesn’t disappear despite of clicking the X button, so we know where we have to go in the code in order to fix it.</p>
+
+  <p>No less important is the data encapsulation. This scary-sounding word simply means restricting the access to variables form other module(variable x in module y is available only in module y, we cannot use it in module z(unless there is also a variable x in module z, but then they are two different variables)) – thanks to this we reduce the risk of overwriting the variable, naming conflicts or other unexpected errors.</p>
+</article>
+
+<article>
+  <h2>What exactly is a module?</h2>
+  <p>So far I have used several times the “module” expression, but what is module, and what are the differences between module and script? Generally module is a kind of close environment in which we have control over what goes out of module. The unique characteristic of module is fact of exporting something(function, object, etc). Despite of this there are a lot of differences, eg, modules are always in strict mode, modules are loaded asynchronously(they do not block the parse), the value of this === undefined at the outer scope (not window). More information <a href="https://stackoverflow.com/questions/39652618/classic-scripts-vs-module-scripts-in-javascript" target="_blank">here</a>. Actually JS has its own native <a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/" target="_blank">modules</a>, so using them do not require using other external tools.</p>
+</article>
+
+<article>
+  <h2>Why splitting code with normal script is not good?</h2>
+  <p>Someone can ask why we have to play with some modules, cuz we only need to create several .js file and attach them to our page – effect(theoretically) the same. In fact this solution will work, but it has a few side effects. We need to attach those scripts in the appropriate order – let’s assume that we have a script which dynamically adds some element to the page(eg button) – call him x.js and the second script in which we get the reference to this added element and add listener to him – call it y.js – if the attach order looks like:</p>
+
+```html:title=HTML-1
+<script src="./x.js"></script>
+<script src="./y.js"></script>
+```
+
+<p>Everything works well, however, it is enough if the order is different to get the error that in y.js we are trying to get a reference to an element that does not exist. In the case of modules, there is no such problem, we have one main file to which we import what we need.</p>
+</article>
+
+<article>
+  <h2>Module vs script - sum up</h2>
+  <p>I suspect that my above explanations may not be clear enough, so I'll try to sum it up. Generally when it comes to modules we attach only one file to our .html file and everything else what we need we import to this file, we can import something to this main file if this value is export from other file - everything is connected together. When it comes to non-modular approach we attach everything in our .html file and that makes that there is no relationship between parts of our code.</p>
+</article>
+
+<article>
+  <h2>Simple modules presentation</h2>
+  <p>Ok, so let's write some really basic example for showing how to use modules in practice. Let's assume we have a basic HTML structure like this:</p>
+
+```html:title=HTML-2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button>Add</button>
+  </form>
+
+  <script src="./main.js"></script>
+  <script src="./sum.js"></script>
+</body>
+</html>
+```
+
+<p>And two js files - one main file, and one with auxiliary function</p>
+
+```js:title=JS-1
+//main.js
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const a = parseInt(document.querySelector("#a").value);
+  const b = parseInt(document.querySelector("#b").value);
+  sum(a,b);
+});
+
+```
+
+```js:title=JS-2
+//sum.js
+function sum(a,b){
+  alert(a+b);
+}
+
+```
+
+<p>Now we change it into modules. Let magic happen! Firstly we have to decide which js file is our entrypoint - in our case it is main.js, so let's change the script into module.</p>
+
+```html:title=HTML-3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="number" id="a">
+    <input type="number" id="b">
+    <button>Add</button>
+  </form>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
+```
+<p>Voilà, now we have to connect main and sum file together. We will export sum function from sum.js, then import it into main.js and use it.</p>
+
+```js:title=JS-3
+//sum.js
+function sum(a,b){
+  alert(a+b);
+}
+
+export default sum;
+
+```
+
+```js:title=JS-4
+//main.js
+import sum from "./sum.js";
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const a = parseInt(document.querySelector("#a").value);
+  const b = parseInt(document.querySelector("#b").value);
+  sum(a,b);
+});
+
+```
+<p>This simple change gives as all benefits which I have written above.</p>
+</article>
+
+<article>
+  <h2>Summary</h2>
+  <p>May be modules are not so popular(especially when there are a lot of so useful frameworks), but native modules are great at introducing the concept of code splitting into smaller (reusable) pieces. Using modules, we just create components – each popular framework based on components so it is good to <q>greet</q> the components using native modules.</p>
+</article>
