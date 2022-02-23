@@ -14,12 +14,12 @@ tags:
 
 <article>
   <h2>Our plan</h2>
-  <p>Let's describe how our project will look like. There will be one .html and .css file - nothing special, ctrl+c, ctrl+v from the orginal project. The differences will be when it comes to .js file(s), there will be one entrypoint file(index.js), and three <q>modules</q> or <q>components</q> - one will be responsible for form handling, another for showing the final decision, and the last one for addingthe user arguments to list. Okey, so we have plan, let's code!</p>
+  <p>Let's describe how our project will look like. There will be one .html and .css file - nothing special, ctrl+c, ctrl+v from the original project. The differences will be when it comes to .js file(s), there will be one entrypoint file(index.js), and three <q>modules</q> or <q>components</q> - one will be responsible for form handling, another for showing the final decision, and the last one for adding the user arguments to list. Okey, so we have plan, let's code!</p>
 </article>
 
 <article>
   <h2>Let's code</h2>
-  <p>Let's start with the basic - .html, and .css as I have mentoined above I will just copy it from the orginal project, and in order not to <q>stretch</q> this post unnecessarily I will not show the css here. Let's remind our html file:</p>
+  <p>Let's start with the basic - .html, and .css as I have mentioned above I will just copy it from the original project, and in order not to <q>stretch</q> this post unnecessarily I will not show the css here. Let's remind our html file:</p>
 
 ```html:title=HTML-1
 <!DOCTYPE html>
@@ -87,7 +87,7 @@ tags:
 console.log(this);
 ```
 
-<p>index.js is now a module, so the this === undefined - I hope you answered it corectly, let's continue. First of all we have to handle our form, so we will create another module which will export the special function which will be imported to index.js and used to form handle. In order to keep the project readable I will keep the modules in modules directory.</p>
+<p>index.js is now a module, so the this === undefined - I hope you answered it correctly, let's continue. First of all we have to handle our form, so we will create another module which will export the special function which will be imported to index.js and used to form handle. In order to keep the project readable I will keep the modules in modules directory.</p>
 
 ```js:title=./modules/analisisFormHandling.js
 const analisisForm = document.querySelector("#analisisForm");
@@ -173,7 +173,7 @@ export default function showDecision(plusesSum, minusesSum) {
 }
 ```
 
-<p>Now we have to import it into form hander and pass the appropriate arguments</p>
+<p>Now we have to import it into form handler and pass the appropriate arguments</p>
 
 ```js:title=./modules/analisisFormHandling.js
 import showDecision from "./showDecision.js";
