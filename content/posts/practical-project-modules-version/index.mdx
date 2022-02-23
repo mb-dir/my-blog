@@ -16,3 +16,194 @@ tags:
   <h2>Our plan</h2>
   <p>Let's describe how our project will look like. There will be one .html and .css file - nothing special, ctrl+c, ctrl+v from the orginal project. The differences will be when it comes to .js file(s), there will be one entrypoint file(index.js), and three <q>modules</q> or <q>components</q> - one will be responsible for form handling, another for showing the final decision, and the last one for addingthe user arguments to list. Okey, so we have plan, let's code!</p>
 </article>
+
+<article>
+  <h2>Let's code</h2>
+  <p>Let's start with the basic - .html, and .css as I have mentoined above I will just copy it from the orginal project, and in order not to <q>stretch</q> this post unnecessarily I will not show the css here. Let's remind our html file:</p>
+
+```html:title=HTML-1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits analisis app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="app">
+  <header class="appHeader">
+    <h1 class="appHeader__header">Benefits analisis app</h1>
+    <p class="paragraph appHeader__description">Thanks to this app you will make a good decision</p>
+  </header>
+  <main class="benefitsApp">
+    <section class="analysis benefitsApp__analysis">
+      <form id="analisisForm" class="analisis__submitProblem">
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="decision">Write plus/minus of your decision</label>
+            <input class="inputContainer__input" type="text" id="decision">
+          </div>
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="typeSelect">Is it plus or minus:</label>
+            <select class="inputContainer__input" name="type" id="typeSelect">
+              <option value="plus">Plus</option>
+              <option value="minus">Minus</option>
+            </select>
+          </div>
+          <div class="inputContainer">
+            <label class="inputContainer__label" for="importanceSelect">Importance scale:</label>
+            <select class="inputContainer__input" name="type" id="importanceSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        <button class="btn">Add</button>
+      </form>
+    </section>
+    
+    <section class="benefitsApp__boxes">
+      <div class="box benefitsApp__plusBox">
+        <h2 class="benefitsApp__header">Pluses</h2>
+        <ul class="benefitsApp__list" id="plusesList">
+        </ul>
+      </div>
+      <div class="box benefitsApp__minusBox">
+        <h2 class="benefitsApp__header">Minuses</h2>
+        <ul class="benefitsApp__list" id="minusesList">
+        </ul>
+      </div>
+    </section>
+    <p id="finalDecision" class="paragraph benefitsApp__finalDecision"></p>
+  </main>
+</body>
+<script src="./index.js" type="module"></script>
+</html>
+```
+
+<p>The really important change is in the 56'th line, as you can see we change this script into module. Now I have a question for you - what will the result of this code be?</p>
+
+```js:title=index.js
+console.log(this);
+```
+
+<p>index.js is now a module, so the this === undefined - I hope you answered it corectly, let's continue. First of all we have to handle our form, so we will create another module which will export the special function which will be imported to index.js and used to form handle. In order to keep the project readable I will keep the modules in modules directory.</p>
+
+```js:title=./modules/analisisFormHandling.js
+const analisisForm = document.querySelector("#analisisForm");
+
+export default function analisisFormHandling() {
+  analisisForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const decisionArgument = document.querySelector("#decision").value;
+    const typeSelect = document.querySelector("#typeSelect").value;
+    const importanceSelect = parseInt(
+      document.querySelector("#importanceSelect").value
+    );
+
+    console.log(decisionArgument, typeSelect, importanceSelect);
+  });
+}
+```
+
+```js:title=index.js
+import analisisFormHandling from "./modules/analisisFormHandling.js";
+
+analisisFormHandling();
+```
+<p>We export the function which handle the submit event on the form and logs the data from form, but in the future those information will be passed to another functions. Now let's create the logic related with adding the argument to pluses/minuses box.</p>
+
+```js:title=modules/createListItem.js
+const plusesList = document.querySelector("#plusesList");
+const minusesList = document.querySelector("#minusesList");
+export default function createListItem(
+  type,
+  decisionArgument,
+  importanceSelect
+) {
+  const listElement = document.createElement("li");
+  listElement.classList.add("benefitsApp__point");
+  listElement.innerHTML = `${decisionArgument}(imp: ${importanceSelect})`;
+
+  if (type === "plus") {
+    plusesList.appendChild(listElement);
+  } else {
+    minusesList.appendChild(listElement);
+  }
+}
+```
+
+<p>There is a function which has three parameters - thanks to <q>type</q> the app can decide where(to which box) the argument is supposed to go, the another parameters are used in the li content - let's use it into our form handler.</p>
+
+```js:title=./modules/analisisFormHandling.js
+import createListItem from "./createListItem.js";
+
+const analisisForm = document.querySelector("#analisisForm");
+
+export default function analisisFormHandling() {
+  analisisForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const decisionArgument = document.querySelector("#decision").value;
+    const typeSelect = document.querySelector("#typeSelect").value;
+    const importanceSelect = parseInt(
+      document.querySelector("#importanceSelect").value
+    );
+
+    if (typeSelect === "plus") {
+      createListItem("plus", decisionArgument, importanceSelect);
+    } else {
+      createListItem("minus", decisionArgument, importanceSelect);
+    }
+  });
+}
+```
+
+<p>The last thing which we have to do is implement the logic which determines which is more profitable. We need to have two variables for pluses/minuses importance sum, those variables will be updated always on the form submit(when user add another argument with the importance scale), and those variables will be passed to special function(module) which will show the appropriate communique to user.</p>
+
+```js:title=./modules/showDecision.js
+const finalDecision = document.querySelector("#finalDecision");
+export default function showDecision(plusesSum, minusesSum) {
+  if (plusesSum > minusesSum) {
+    finalDecision.innerHTML = "The sum of importance is bigger for pluses";
+  } else if (plusesSum === minusesSum) {
+    finalDecision.innerHTML = "50/50";
+  } else {
+    finalDecision.innerHTML = "The sum of importance is bigger for minuses";
+  }
+}
+```
+
+<p>Now we have to import it into form hander and pass the appropriate arguments</p>
+
+```js:title=./modules/analisisFormHandling.js
+import showDecision from "./showDecision.js";
+import createListItem from "./createListItem.js";
+const analisisForm = document.querySelector("#analisisForm");
+
+let plusesSum = 0;
+let minusesSum = 0;
+
+export default function analisisFormHandling() {
+  analisisForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const decisionArgument = document.querySelector("#decision").value;
+    const typeSelect = document.querySelector("#typeSelect").value;
+    const importanceSelect = parseInt(
+      document.querySelector("#importanceSelect").value
+    );
+
+    if (typeSelect === "plus") {
+      plusesSum += importanceSelect;
+      createListItem("plus", decisionArgument, importanceSelect);
+    } else {
+      minusesSum += importanceSelect;
+      createListItem("minus", decisionArgument, importanceSelect);
+    }
+    showDecision(plusesSum, minusesSum);
+  });
+}
+```
+
+<p>And that's everything, we rewrote it using native modules JS, <a href="https://github.com/mb-dir/blog-post-modules-example" target="_blank">there</a> is a full code, you can clone it and see for yourself how much the structure of the project has simplified.</p>
+
+</article>
