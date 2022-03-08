@@ -12,3 +12,8 @@ tags:
   <h2>Introduction</h2>
   <p>The browser provides us the two ways to storage a small amount of data on the client side. The first(and older) are cookies, the newer alternative for them is using storage api. What are the differences between them? What are the advantages/disadvantages? When use them? Below I will try to explain it.</p>
 </article>
+<article>
+  <h2>Briefly about cookies</h2>
+  <p>
+  Cookies keep a small amount of information, they are storage in the browser as a text. By default cookies are attached to every request, so they are sent to server. In practice the cookies are common use to send some data from server to user. We can have access to cookes by referring to <i>document.cookie</i>, and there is a small inconvenience, namely all cookies are kept in one string. The sample <i>document.cookie</i>s content may looks like this:  '_ga=GA1.2.2138379679.1646167857; __gads=ID=d3e3855627e8bcb7-2212357e51cd005c:T=1646167856:RT=1646167856:S=ALNI_Ma9bg0f9jCzkw44ZNJ1clr5zhHOpw; userid=e520c30b6ef0cc36680c953e719996ff; age=25; _gid=GA1.2.1294749342.1646768440'. Working with <i>document.cookie</i> required using the special regex in order to “cut” it into pieces.</p>
+</article>
