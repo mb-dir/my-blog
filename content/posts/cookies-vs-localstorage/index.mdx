@@ -33,4 +33,33 @@ tags:
     <li>Storage api is more capacious than cookies – poor 4KB vs more serious 5MB</li>
     <li>Storage api is more elastic when it comes to the structure of data which we can keep there</li>
   </ul>
+
+  <h3>Cookies vs storage - lifetime</h3>
+  <p>It is obvious that we do not want to our data in cookies/storage was kept indefinitely. Both solutions give us options to control how long the data have to be kept. When it comes to storage API, we can use two options, namely localStorage and sessionStorage. The difference between them is easy to understand. The data in localStorage are kept until they are explicitly removed(in the devtools or from the js code using the removeItem() method). The data in sessionStorage are kept only for the time the browser window is “alive”. When user deletes the card the data from sessionStorage ale also deleted. You can run below code in the browser (F12 ->Console ->ctrl+c->ctrl+v), next go to the “Application”, you should see something like this:</p>
+  
+  <img class="fit-picture" src="./devtoolsApplication1.jpg" alt="The state of davtools application tab"/>
+  <img class="fit-picture" src="./devtoolsApplication2.jpg" alt="The state of davtools application tab"/>
+  
+  <p>Then delete the card and open it again, go to the “Application” one more time and see what has happened – that’s the difference.</p>
+
+```js:title=above-example-code
+localStorage.setItem("local", "Hello!");
+sessionStorage.setItem("session", "Hello!");
+```
+
+<p>When it comes to the cookies by default they behave(when it comes to “life time”) like the sessionStorage. We can control that thanks to two parameters: expires and max-age. The expires sets the cookie expiry date. The max-age is the number of seconds the cookie will be active, so the code:</p>
+
+```js:title=cookie-expires
+let nextWeek = new Date(Date.now() + 604800);
+nextWeek = nextWeek.toUTCString();
+document.cookie = `user=Joe; expires=${nextWeek}`;
+```
+
+<p>Will create a sample cookie which will be active one week from the moment of entering the website, while the code like this:</p>
+
+```js:title=cookie-max-age
+document.cookie = "user=joe; max-age=604800";
+```
+
+  <p>Means that the cookie will be delete after 604800 seconds – that is after a week. The max-age and expieres ensure greater flexibility in the determining the lifetime of our data.</p>
 </article>
