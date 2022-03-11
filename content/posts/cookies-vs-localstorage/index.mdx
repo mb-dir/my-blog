@@ -69,4 +69,16 @@ document.cookie = "user=joe; max-age=604800";
   <img class="fit-picture" src="./cookiesInRequest.jpg" alt="This photo shows the fact that there is cookie header in request"/>
 
   <p>The more cookies, the bigger requests, and thus longer waiting times. When it comes to storage api there is no such a “side effect”.</p>
+
+  <h3>The structure types which we can keep</h3>
+  <p>As you may noticed cookies are short text data, we cannot keep there any more complicated structures like arrays or objects. Storage api is much more useful in this regard. Using some tricks with JSON.stringify() and JSON.parse() we can keep in local/sessionStorage more complicated data.</p>
+  
+  <img class="fit-picture" src="./objectInStorage.jpg" alt="How to set the object in localStorage"/>
+  
+  <p>And the data reading</p>
+  
+  <img class="fit-picture" src="./getObjectFromStorage.jpg" alt="How to get the object in localStorage"/>
+
+  
+
 </article>
