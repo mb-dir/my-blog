@@ -62,4 +62,11 @@ document.cookie = "user=joe; max-age=604800";
 ```
 
   <p>Means that the cookie will be delete after 604800 seconds – that is after a week. The max-age and expieres ensure greater flexibility in the determining the lifetime of our data.</p>
+
+  <h3>The more cookies the bigger requests</h3>
+  <p>Cookies by design serve to transfer the small amount of data between the browser and the server. Therefore no one should be surprised that cookies are attached to requests, we can verify it easily using the “Network” tab in the devtools</p>
+  
+  <img class="fit-picture" src="./cookiesInRequest.jpg" alt="This photo shows the fact that there is cookie header in request"/>
+
+  <p>The more cookies, the bigger requests, and thus longer waiting times. When it comes to storage api there is no such a “side effect”.</p>
 </article>
