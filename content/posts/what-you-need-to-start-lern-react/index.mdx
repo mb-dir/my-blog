@@ -37,3 +37,56 @@ tags:
   <h2>Array methods</h2>
   <p>Generally array are common use in React, the reason is simple – ease of data storage. Also many api’s response take the form of an array. The most used methods in React are array.map() and array.filter() – those two methods make life of React developer more beautiful(okey, maybe not more beautiful, but much simpler ;)). So if you are not familiar with .map() and .filter() I will advise you to run for example CodePen and MDN and test those methods until you understand what it is all about.</p>
 </article>
+
+<article>
+  <h2>Helpful JS simplifications</h2>
+  <p>One of the first search result after typing “quotes about simplicity” in Google is “Nature is pleased with simplicity”, it is said that Isaac Newton one said. People should harmonize with nature, so let’s try to create simple solutions. Fortunately for us JS provides us a lot of syntax which doesn’t introduce revolutionary changes, but makes that the code structure is less complex. As you can guess React likes when we use that “simple” syntax. So instead of normal function as a callback try to use arrow function, instead of string concatenation try to use template literals, if it is possible use the ternary operator, also using the Object Destructuring makes that our code is more readable. Take a look at some examples:</p>
+
+```js:title=example-1
+//ugly, long version
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map(function(number){
+  return number*number;
+});
+```
+
+```js:title=example-2
+//not bad
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map((number)=>{
+  return number*number;
+});
+```
+
+```js:title=example-3
+//that's beautiful
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map((number)=>number*number);
+```
+
+<p>destructuring and template literals</p>
+
+```js:title=example-4
+//it is awful
+const person={
+  name: "Pavel",
+  age: 21,
+}
+console.log("Name: " + person.name + ", age: " + person.age);
+```
+
+```js:title=example-5
+//it is great
+const person={
+  name: "Pavel",
+  age: 21,
+}
+const {name,age} = person;
+console.log(`Name: ${name}, age: ${age}`);
+```
+
+<p>Of course those code “simplification” do not end with the above four, but at the very beginning it is minimum which is enough.</p>
+</article>
