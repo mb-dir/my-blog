@@ -1,0 +1,224 @@
+---
+title: What do you have to know to hassle-free React learning?
+date: 2022-03-30
+timeToRead: 10
+description: Description prerequisites for learning React
+tags:
+  - React
+  - JS
+  - Intermediate
+---
+<article>
+  <h2>Introduction</h2>
+  <p>Probably everyone who starts learning JS quickly comes across the concept of frontend frameworks. These tools are presented as a miracle cure for all problems. Very often, courses whose main motive is to learn a framework (e.g. React) advertise that the ability to write code using a framework is necessary to find a job - and it is true. Basically, these goddamn frameworks everywhere you look. So why not start your adventure with web development by learning one of them? The answer is simple: because we will not be able to understand the rules of a given framework well without understanding JS. In this article, I will mention a few key JS concepts that you need to understand in order to make learning React fun and effortless. If the issues highlighted by me are understandable, you can go ahead and start learning.</p>
+</article>
+
+<article>
+  <h2>A bit of theory won't hurt</h2>
+  <p>Not many adepts of the art of programming like to delve into more theoretical part of given programming language. Really often it is related with the necessity to understand confusing and complicated(at the first glance) definitions. However in order to start learning React you must have some theoretical knowledge about JS and generally programming. The knowledge about conceptions like:</p>
+
+  <ul>
+    <li>declarative programming</li>
+    <li>functional paradigm</li>
+    <li>object paradigm</li>
+    <li>this in JS</li>
+    <li>the callback conception</li>
+    <li>the difference between “mutable” and “immutable” data</li>
+    <li>knowledge about components</li>
+    <li>the difference between SPA and MPA</li>
+    <li>scope and data hermitization</li>
+    <li>imperfections of DOM api</li>
+  </ul>
+
+  <p>For sure will help to understand how React works and why we need to use it. So despite of the fact that learning the theoretical aspect may be associated with a sad period of study at school, it is good to have knowledge about those concepts.</p>
+</article>
+
+<article>
+  <h2>Array methods</h2>
+  <p>Generally array are common use in React, the reason is simple – ease of data storage. Also many api’s response take the form of an array. The most used methods in React are array.map() and array.filter() – those two methods make life of React developer more beautiful(okey, maybe not more beautiful, but much simpler ;)). So if you are not familiar with .map() and .filter() I will advise you to run for example CodePen and MDN and test those methods until you understand what it is all about.</p>
+</article>
+
+<article>
+  <h2>Helpful JS simplifications</h2>
+  <p>One of the first search result after typing “quotes about simplicity” in Google is “Nature is pleased with simplicity”, it is said that Isaac Newton one said. People should harmonize with nature, so let’s try to create simple solutions. Fortunately for us JS provides us a lot of syntax which doesn’t introduce revolutionary changes, but makes that the code structure is less complex. As you can guess React likes when we use that “simple” syntax. So instead of normal function as a callback try to use arrow function, instead of string concatenation try to use template literals, if it is possible use the ternary operator, also using the Object Destructuring makes that our code is more readable. Take a look at some examples:</p>
+
+```js:title=example-1
+//ugly, long version
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map(function(number){
+  return number*number;
+});
+```
+
+```js:title=example-2
+//not bad
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map((number)=>{
+  return number*number;
+});
+```
+
+```js:title=example-3
+//that's beautiful
+const numbers = [1,2,3,4,5];
+
+const numbersSquares = numbers.map((number)=>number*number);
+```
+
+<p>destructuring and template literals</p>
+
+```js:title=example-4
+//it is awful
+const person={
+  name: "Pavel",
+  age: 21,
+}
+console.log("Name: " + person.name + ", age: " + person.age);
+```
+
+```js:title=example-5
+//it is great
+const person={
+  name: "Pavel",
+  age: 21,
+}
+const {name,age} = person;
+console.log(`Name: ${name}, age: ${age}`);
+```
+
+<p>Of course those code “simplification” do not end with the above four, but at the very beginning it is minimum which is enough.</p>
+</article>
+
+<article>
+  <h2>The experience in JS</h2>
+  <p>
+  React is a great tool, which is really valuable asset on the labor market, so many new programmers immediately want to delve into its secrets even without knowing the basic of JS. Unfortunately most of them(as not all) will “bounce” from React at the start. Learning is a gradual process, you must have the basic knowledge to be able to extend it later. In the primary school we learn how to add or subtract two number in order to learn during studies for instance how to check the variability of  a function. We must apply the same analogy here. First write a few app in pure JS – they could be even well-known todo app or something like that – and then immerse yourself in React. Such an approach has another one plus, you will feel for yourself what improvements React add to pure JS, thanks to this you will understand why such a tool like React was created. So if you haven’t got your hands “dirty” in the code it is high time to change it.
+  </p>
+</article>
+
+<article>
+  <h2>Quiz</h2>
+  <p>Okay, we know what we need to know to start learning React. Now it would be appropriate to check if we have such knowledge. I have prepared a short quiz for you – take this quiz please. If you give the correct answers to most of questions it means that you know the JS basic which will allow you to delve into the world of React.</p>
+
+  <p>Some theoretical warm-up(the answers are at the end of post).</p>
+  <ul>
+    <li>Little programming, but a theoretical question: you ask your mother to bake your favorite childhood cookies - is it a declarative or imperative approach?</li>
+    <li>A more programmatic, yet theoretical question: what is collback, and which part of the code below is the above-mentioned collback:
+    </li>
+  </ul>
+
+```js:title=example-1
+window.addEventListener("click", ()=>{
+	console.log("Hello")
+});
+
+```
+  <ul>
+    <li>Arrays, I see array everywhere: which of the following methods overwrite arrays, and which create new arrays: push(), pop(), filter(), reverse(), map(), drown()</li>
+  </ul>
+
+  <p>Now we will move on to more difficult concepts</p>
+
+  <p>Conditions, yes, but also no: what will be the effect of this code(and what will happen if we change the boolVaue to false)</p>
+
+```js:title=example-2
+const boolValue = true;
+if(boolValue && console.log("Hello")){
+  console.log("World")
+}
+
+```
+
+  <p>"this"v1: what will be the effect of this code</p>
+
+```js:title=example-3
+const ob = {
+    name : "Joe",
+    show() {
+        console.log(this.name);
+    }
+}
+const show = ob.show.bind({name : "Mike"});
+show();
+
+```
+
+  <p>"this"v2: why is this happening?(you can paste this code to CodePen and see it by yourself)</p>
+
+```html:title=example-4
+<div></div>
+
+```
+
+```css:title=example-4
+div{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+```
+
+```js:title=example-4
+const div = document.querySelector("div");
+div.addEventListener("click", ()=>{
+  console.log(this)//window
+});
+div.addEventListener("click", function(){
+  console.log(this)//div
+});
+
+```
+
+<p>It's time to get some practice</p>
+
+<p>Squares: change [1,2,3,4,5] to [1,4,9,16,25]</p>
+
+<p>Get rid of bad people: From the array coolPeople get rid of those who are not cool - Wladimir is not cool</p>
+
+```js:title=example-5
+const coolPeople = ["You", "Wladimir", "Your best friend", "Wladimir", "Micah"];
+
+```
+</article>
+
+<article>
+  <h2>Answers - Hope you haven't peek</h2>
+
+  <p>Ad1: Declarative, cuz we descrive what the final product should look like - we do not give the entire list of steps, <a href="https://dev.to/ruizb/declarative-vs-imperative-4a7l" target="_blank">click</a></p>
+
+  <p>Ad2: Collback - it is a function which is given to other function as an argument. In this example the collback is our arrow function</p>
+
+  <p>Ad3: filter(), map() - they create a new array based on old one, push(), pop(), reverse() - they modify the current array, drown() - doesn't exist</p>
+
+  <p>Ad4: The && operator returns true only if both expressions are true, it works so that it first checks if its left expression is true, if it turns out to be false, it doesn't check the second expression, because whatever its value the whole expression is still will be false. In our case, boolValue === true, so && will check the second expression, the second expression is console.log (), JS will execute it for us (hence "Hello" in the console), but console.log returns undefined(undefined is a falsy value - it is treat like false), so finally we have true && false which gives false - the inner of the if statement will not run. When we change boolValue to false, JS, after checking the left side, can immediately state that the value of the entire expression is false - it does not go to console.log. Understanding && works a lot in understanding conditional rendering.</p>
+
+  <p>Ad5: We will see "Mike", cuz we refer to "this" (that is to ob), but bind return the new function with "this" changed, on line 7 our "this" is already object with name property === "Mike"</p>
+
+  <p>Ad6: Arrow function doesn't change the "this" context, <a href="https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/#1-this-value" target="_blank">click</a></p>
+
+  <p>Ad7: Using the map() method</p>
+
+```js:title=example-6
+const numbers = [1,2,3,4,5];
+const squares = numbers.map(number=>number*number);
+console.log(squares);//[1,4,9,16,25]
+
+```
+
+  <p>Ad8: Using the filter() method</p>
+
+```js:title=example-7
+const coolPeople = ["You", "Wladimir", "Your best friend", "Wladimir", "Micah"];
+
+const onlyCoolPeople = coolPeople.filter((person)=>{
+  if(person !== "Wladimir"){
+    return person;
+  }
+});
+console.log(onlyCoolPeople);//["You","Your best friend","Micah"]
+
+```
+</article>
