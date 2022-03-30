@@ -117,7 +117,6 @@ window.addEventListener("click", ()=>{
 ```
   <ul>
     <li>Arrays, I see array everywhere: which of the following methods overwrite arrays, and which create new arrays: push(), pop(), filter(), reverse(), map(), drown()</li>
-    <li>a</li>
   </ul>
 
   <p>Now we will move on to more difficult concepts</p>
@@ -181,6 +180,45 @@ div.addEventListener("click", function(){
 
 ```js:title=example-4
 const coolPeople = ["You", "Wladimir", "Your best friend", "Wladimir", "Micah"];
+
+```
+</article>
+
+<article>
+  <h2>Answers - Hope you haven't peek</h2>
+
+  <p>Ad1: Declarative, cuz we descrive what the final product should look like - we do not give the entire list of steps, <a href="https://dev.to/ruizb/declarative-vs-imperative-4a7l" target="_blank">click</a></p>
+
+  <p>Ad2: Collback - it is a function which is given to other function as an argument. In this example the collback is our arrow function</p>
+
+  <p>Ad3: filter(), map() - they create a new array based on old one, push(), pop(), reverse() - they modify the current array, drown() - doesn't exist</p>
+
+  <p>Ad4: The && operator returns true only if both expressions are true, it works so that it first checks if its left expression is true, if it turns out to be false, it doesn't check the second expression, because whatever its value the whole expression is still will be false. In our case, boolValue === true, so && will check the second expression, the second expression is console.log (), JS will execute it for us (hence "Hello" in the console), but console.log returns undefined(undefined is a falsy value - it is treat like false), so finally we have true && false which gives false - the inner of the if statement will not run. When we change boolValue to false, JS, after checking the left side, can immediately state that the value of the entire expression is false - it does not go to console.log. Understanding && works a lot in understanding conditional rendering.</p>
+
+  <p>Ad5: We will see "Mike", cuz we refer to "this" (that is to ob), but bind return the new function with "this" changed, on line 7 our "this" is already object with name property === "Mike"</p>
+
+  <p>Ad6: Arrow function doesn't change the "this" context, <a href="https://dmitripavlutin.com/differences-between-arrow-and-regular-functions/#1-this-value" target="_blank">click</a></p>
+
+  <p>Ad6: Using the map() method</p>
+
+```js:title=example-6
+const numbers = [1,2,3,4,5];
+const squares = numbers.map(number=>number*number);
+console.log(squares);//[1,4,9,16,25]
+
+```
+
+  <p>Ad7: Using the filter() method</p>
+
+```js:title=example-7
+const coolPeople = ["You", "Wladimir", "Your best friend", "Wladimir", "Micah"];
+
+const onlyCoolPeople = coolPeople.filter((person)=>{
+  if(person !== "Wladimir"){
+    return person;
+  }
+});
+console.log(onlyCoolPeople);//["You","Your best friend","Micah"]
 
 ```
 </article>
