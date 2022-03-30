@@ -97,3 +97,90 @@ console.log(`Name: ${name}, age: ${age}`);
   React is a great tool, which is really valuable asset on the labor market, so many new programmers immediately want to delve into its secrets even without knowing the basic of JS. Unfortunately most of them(as not all) will “bounce” from React at the start. Learning is a gradual process, you must have the basic knowledge to be able to extend it later. In the primary school we learn how to add or subtract two number in order to learn during studies for instance how to check the variability of  a function. We must apply the same analogy here. First write a few app in pure JS – they could be even well-known todo app or something like that – and then immerse yourself in React. Such an approach has another one plus, you will feel for yourself what improvements React add to pure JS, thanks to this you will understand why such a tool like React was created. So if you haven’t got your hands “dirty” in the code it is high time to change it.
   </p>
 </article>
+
+<article>
+  <h2>Quiz</h2>
+  <p>Okay, we know what we need to know to start learning React. Now it would be appropriate to check if we have such knowledge. I have prepared a short quiz for you – take this quiz please. If you give the correct answers to most of questions it means that you know the JS basic which will allow you to delve into the world of React.</p>
+
+  <p>Some theoretical warm-up(the answers are at the end of post).</p>
+  <ul>
+    <li>Little programming, but a theoretical question: you ask your mother to bake your favorite childhood cookies - is it a declarative or imperative approach?</li>
+    <li>A more programmatic, yet theoretical question: what is collback, and which part of the code below is the above-mentioned collback:
+    </li>
+  </ul>
+
+```js:title=example-1
+window.addEventListener("click", ()=>{
+	console.log("Hello")
+});
+
+```
+  <ul>
+    <li>Arrays, I see array everywhere: which of the following methods overwrite arrays, and which create new arrays: push(), pop(), filter(), reverse(), map(), drown()</li>
+    <li>a</li>
+  </ul>
+
+  <p>Now we will move on to more difficult concepts</p>
+
+  <p>Conditions, yes, but also no: what will be the effect of this code(and what will happen if we change the boolVaue to false)</p>
+
+```js:title=example-2
+const boolValue = true;
+if(boolValue && console.log("Hello")){
+  console.log("World")
+}
+
+```
+
+  <p>"this"v1: what will be the effect of this code</p>
+
+```js:title=example-3
+const ob = {
+    name : "Joe",
+    show() {
+        console.log(this.name);
+    }
+}
+const show = ob.show.bind({name : "Mike"});
+show();
+
+```
+
+  <p>"this"v2: why is this happening?(you can paste this code to CodePen and see it by yourself)</p>
+
+```html:title=example-4
+<div></div>
+
+```
+
+```css:title=example-4
+div{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+```
+
+```js:title=example-4
+const div = document.querySelector("div");
+div.addEventListener("click", ()=>{
+  console.log(this)//window
+});
+div.addEventListener("click", function(){
+  console.log(this)//div
+});
+
+```
+
+<p>It's time to get some practice</p>
+
+<p>Squares: change [1,2,3,4,5] to [1,4,9,16,25]</p>
+
+<p>Get rid of bad people: From the array coolPeople get rid of those who are not cool - Wladimir is not cool</p>
+
+```js:title=example-4
+const coolPeople = ["You", "Wladimir", "Your best friend", "Wladimir", "Micah"];
+
+```
+</article>
