@@ -13,3 +13,77 @@ tags:
   <h2>Introduction</h2>
   <p>In "Quick" series I will describe some short aspects of JavaScript, seemingly simple things that are easy to forget, so insted of search the documentation you can look here. I will also try to put some protips. In today's post I will write about the difference between target and currentTarget property in event object - they are similar, but in some cases their interchangable use may lead to unexpected bugs.</p>
 </article>
+
+<article>
+  <h2>The difference</h2>
+  <p>As short as possible: currentTarget is the element to which listener is added, target is the element which triggers the event - it plays a signifacy role in the "click" event. Let's look at the example:</p>
+
+```js:title=example-1
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click",(e)=>{
+  console.log("target: ");
+  console.log(e.target);
+  console.log("currentTarget: ");
+  console.log(e.currentTarget)
+});
+
+```
+
+<p>And HTML:</p>
+
+```html:title=example-1
+<button>Hey! Click me!</button>
+
+```
+
+<p>Both of them indicate to the same - button element. Let's modify our JS:</p>
+
+```js:title=example-2
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click",(e)=>{
+e.target.style.backgroundColor = "red";
+});
+
+```
+
+<p>What do you think, change the target to currentTarget will cause some bugs in this case? Of course will not, the code will work the same regardless of whether we use target or currentTarget(both are the same). Let's add an extra element to our btn, for instance icon:</p>
+
+```html:title=example-2
+<button>Hey! Click me! <svg viewBox="0 0 512 512" width="20" title="arrows-alt">
+  <path d="M352.201 425.775l-79.196 79.196c-9.373 9.373-24.568 9.373-33.941 0l-79.196-79.196c-15.119-15.119-4.411-40.971 16.971-40.97h51.162L228 284H127.196v51.162c0 21.382-25.851 32.09-40.971 16.971L7.029 272.937c-9.373-9.373-9.373-24.569 0-33.941L86.225 159.8c15.119-15.119 40.971-4.411 40.971 16.971V228H228V127.196h-51.23c-21.382 0-32.09-25.851-16.971-40.971l79.196-79.196c9.373-9.373 24.568-9.373 33.941 0l79.196 79.196c15.119 15.119 4.411 40.971-16.971 40.971h-51.162V228h100.804v-51.162c0-21.382 25.851-32.09 40.97-16.971l79.196 79.196c9.373 9.373 9.373 24.569 0 33.941L425.773 352.2c-15.119 15.119-40.971 4.411-40.97-16.971V284H284v100.804h51.23c21.382 0 32.09 25.851 16.971 40.971z" />
+</svg></button>
+
+```
+
+<p>(Yeap, I am too lazy to add cdn to fontawesome so I have copied the whole svg)</p>
+<p>Let's return to our code:</p>
+
+```js:title=example-3
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click",(e)=>{
+  console.log("target: ");
+  console.log(e.target);
+  console.log("currentTarget: ");
+  console.log(e.currentTarget)
+});
+
+```
+<p>Now try to click btn twice - first time outside the icon, socond time in the added icon. this is the difference between target and currentTarget (target only points to svg). In the latter case, the target (event initiator) is an icon. If you don't feel the difference yet, go back to our "program" and try to click on the icon and you will see the differences.</p>
+
+```js:title=example-4
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click",(e)=>{
+  e.target.style.backgroundColor = "red";
+});
+
+```
+
+</article>
