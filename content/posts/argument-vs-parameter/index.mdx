@@ -1,0 +1,29 @@
+---
+title: Quick - argument vs parameter
+date: 2022-04-22
+timeToRead: 10
+description: The difference between function argument and parameter
+tags:
+  - Quick
+  - JS
+  - Beginner
+---
+
+<article>
+  <h2>Introduction</h2>
+  <p>I will risk saying that the most confused concepts in programming are the argument of the function and the parameter of the function. Using these terms interchangeably is not a big mistake - in most situations everyone will understand what it is about, but it is worth knowing their correct definitions.</p>
+</article>
+
+<article>
+  <h2>The point of difference</h2>
+  <p>The difference is prosaic. The <b>argument</b> is everything what we pass to function when we call the function, whereas <b>parameter</b> is everything what we declare durning function declaration.</p>
+
+```js:title=example-1
+function add(a,b){//In this context a,b are parameters
+  const sum = a+b;
+  return sum;
+}
+
+add(1,2);//Here 1,2 we have to call argumetns
+```
+</article>
