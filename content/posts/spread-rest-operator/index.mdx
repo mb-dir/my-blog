@@ -39,3 +39,60 @@ add(1,2,3,4,5);//15
 <p>There is one important thing about which we have to remember – rest operator must be the last parameter, else we will see the error "Rest parameter must be last formal parameter".</p>
 
 </article>
+
+<article>
+  <h2>Spread operator</h2>
+
+  <p>Using the spread operator we can break the iterable collections into single elements The spread operator has a much wider application, thanks to it we can, for example, copy arrays</p>
+
+```js:title=example-3
+const arr1 = [1,2,3];
+const arr2 = arr1;
+console.log(arr1 === arr2)//true - that means it is not a copy - there is still the same refference
+
+const arr3 = [1,2,3];
+const arr4 = [...arr3];
+
+console.log(arr3 === arr4);//false - that means it is not the same refference so it is a copy
+```
+
+<p>Join two arrays</p>
+
+```js:title=example-4
+const arr1 = [1,2,3];
+const arr2 = [3,4,5];
+
+const arr3 =[...arr1,...arr2];
+console.log(arr3);//[1,2,3,3,4,5];
+```
+
+<p>Break an array into single elements</p>
+
+```js:title=example-5
+const arr1 = [1,2,3];
+
+//Math.min needs a single parameters
+const minValue = Math.min(...arr1);
+
+console.log(minValue);//1
+```
+
+<p>Convert DOM collections into arrays - so we can use methods intended for arrays</p>
+
+```html:title=example-1
+<h1 class="header">Lorem</h1>
+<h2 class="header">ipsum</h2>
+<h3 class="header">dolor</h3>
+<h4 class="header">sit</h4>
+<h5 class="header">ament</h5>
+```
+
+```js:title=example-6
+const headers = document.querySelectorAll(".header");
+
+//Without converting we will get an error - headers.map is not a function
+const headersTexts = [...headers].map(header=>header.innerHTML);
+console.log(headersTexts);//["Lorem","ipsum","dolor","sit","ament"]
+```
+
+</article>
