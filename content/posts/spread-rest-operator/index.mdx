@@ -11,3 +11,31 @@ tags:
   <h2>Introduction</h2>
   <p>JavaScript is a high level programming language, hence it has a lot of improvements which are so useful for software designer. There are many declarative solutions  - e.g. we can use many arrays method like map() or filter() thanks to which we do not have to do everything using "classic" for loop. The "…" operator(depending on context it is called rest or spread operator) is also the sample of syntax which make the programmer's work much easier. If you want to know more about usage of "…" I encourage you to read this post.</p>
 </article>
+
+<article>
+  <h2>Rest operator</h2>
+  <p>The rest operator basically has only one application – it is used as a function parameter, thanks to this it can be passed any number of arguments as one parameter(which is an array). Take a look at below examples.</p>
+  <p>Let’s assume that we have to write a function which write the sum of passed numbers, there is a small issue – we do not know the amount of arguments(numbers), so functions like the below one will not meet the requirements.</p>
+
+```js:title=example-1
+function add(a,b){
+  console.log(a+b);
+}
+add(1,2,3);//3 instead of 6
+```
+
+<p>The magic "three dots" come to help us</p>
+
+```js:title=example-2
+function add(...numbers){
+  const sum = numbers.reduce((a,b)=>{
+    return a+b;
+  });
+  console.log(sum);
+}
+add(1,2,3,4,5);//15
+```
+
+<p>There is one important thing about which we have to remember – rest operator must be the last parameter, else we will see the error "Rest parameter must be last formal parameter".</p>
+
+</article>
