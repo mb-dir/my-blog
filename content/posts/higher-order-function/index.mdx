@@ -7,3 +7,47 @@ tags:
   - Intermediate
   - JS
 ---
+<h2>Introduction</h2>
+<p>Higher order function – that sounds terrifying, but there is a big chance that you have used them(even unconsciously). I will tell now two facts – the first -  higher order functions are related with functional paradigm, and the second one – React use functional paradigm. So combining those two facts it is not hard to see that <abbr title="higher order function">hof</abbr> are really important concept in modern front-end.</p>
+
+<h2>What is higher order function?</h2>
+
+<p>We can call higher order function when the function takes other function as its parameter or returns other function. Let’s consider first part of definition – "takes other function as its parameter", it is obvious that parameter is some information which we pass to function during the function call, so if we can pass "static" information,  why can’t we pass some logic there? But how can we do it? – Just by passing a function. Let’s move into practice, let’s assume that we have to write a program which will add, subtract, multiply, and divide two numbers, and we have to use functions for it. First think – let’s create 4 functions for each math operation and the problem gone.</p>
+
+```js:title=example
+function add(a,b){
+  return a+b;
+}
+function sub(a,b){
+  return a-b;
+}
+function multiply(a,b){
+  return a*b;
+}
+function div(a,b){
+  return b === 0 ? "cannot be divided by 0" : a/b;
+}
+console.log(add(2,2))//4
+console.log(sub(2,2))//0
+console.log(multiply(2,2))//4
+console.log(div(2,2))//1
+```
+
+<p>Such a solution works, but as my algorithm and data structure lecturer would say - "this is a brutal force solution". We can do it easier, more flexible using higher order function. Let’s create function called mathOperation(a,b,operationLogic). The variables a and b are just numbers, operationLogic is a function which determines the logic of what should happen with the given number. So mathOperation is an example of hof, cuz it uses the other function to determine the logic.</p>
+
+```js:title=example
+function mathOperation(a,b,operationLogic){
+  return operationLogic(a,b)
+}
+
+console.log(mathOperation(2,2,(a,b)=>a+b))//4
+console.log(mathOperation(2,2,(a,b)=>a-b))//0
+console.log(mathOperation(2,2,(a,b)=>a*b))//4
+console.log(mathOperation(2,2,(a,b)=>a/b))//1
+```
+
+<h2>Examples of native higher order functions</h2>
+<p>settTimeout(), array.map(), array.filter(), array.reduce(), array.forEach() - what do they have in common? Each of them takes a different function as a parameter that determines the logic of their behavior, so they are hof.</p>
+
+<h2>Summary</h2>
+<p>Higher order functions are can be helpful – they provide more flexibility in the code(look the example with mathOperation), thanks to them we can also create declarative solutions cuz we do not have to write the whole logic by ourselves, we just can say what has to happen.</p>
