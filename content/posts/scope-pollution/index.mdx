@@ -8,3 +8,7 @@ tags:
   - Intermediate
   - Quick
 ---
+<article>
+  <h2>Scope pollution</h2>
+  <p>So you know the concept of scope, you are aware of that there is something like block scope, global scope, function scope, maybe you have heard about the dynamic and lexical scope. But what is the point, when all the variables can be declared in the global scope, is solves all the problems, we have access to any variable from anywhere in the code. In theory that sounds great, however practice verifies such an approach brutally. Declaring the variables(all or the most) in the global scope is called "<strong>Scope Pollution</strong>". Scope Pollution isn’t nothing good, the variable in global scope is “alive” during the whole time of app uptime(really often takes unnecessary the memory), there may be an accidental overwriting of variable values(an JS which is loosely typed language it may lead to the situation when we expect that the value of a given variable will be number, but by accident in a completely different part of code we will assign a string to it.), and of course the naming conflicts. As you can see, defining all variables as global is not good and we should take advantage of the scope.</p>
+</article>
